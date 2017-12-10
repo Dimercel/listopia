@@ -13,7 +13,7 @@
 
 ## Functions
 
-All functions and constructs in the library are prefixed with a dash (.)
+All functions and constructs in the library are prefixed with a point (.)
 
 ### Basic functions
 
