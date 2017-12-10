@@ -1,0 +1,27 @@
+language: common-lisp
+sudo: false
+
+env:
+  global:
+    - PATH=$HOME/.roswell/bin:$PATH
+    - ROSWELL_INSTALL_DIR=$HOME/.roswell
+    - COVERAGE_EXCLUDE=t
+  matrix:
+    - LISP=sbcl-bin
+
+install:
+  # Install Roswell
+  - curl -L https://raw.githubusercontent.com/snmsts/roswell/release/scripts/install-for-ci.sh | sh
+  - ros install prove
+
+cache:
+  directories:
+    - $HOME/.roswell
+    - $HOME/.config/common-lisp
+
+before_script:
+  - ros --version
+  - ros config
+
+script:
+  - run-prove listopia-test.asd
