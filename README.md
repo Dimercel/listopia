@@ -27,7 +27,7 @@ Extract the first element of a list. If list is empty, returns default value.
 (.head '() 666) ;; => 666
 ```
 
-### .last `(list &optional (default nil))`
+#### .last `(list &optional (default nil))`
 
 Extract the last element of a list. If list is empty, returns default value.
 
@@ -37,7 +37,7 @@ Extract the last element of a list. If list is empty, returns default value.
 (.last '() 666) ;; => 666
 ```
 
-### .tail `(list &optional (default nil))`
+#### .tail `(list &optional (default nil))`
 
 Extract the elements after the head of a list. If list is empty, returns default value.
 
@@ -47,7 +47,7 @@ Extract the elements after the head of a list. If list is empty, returns default
 (.tail '() 666) ;; => 666
 ```
 
-### .init `(list &optional (default nil))`
+#### .init `(list &optional (default nil))`
 
 Return all the elements of a list except the last one. If list is empty, returns default value.
 
@@ -57,7 +57,7 @@ Return all the elements of a list except the last one. If list is empty, returns
 (.init '() 666) ;; => 666
 ```
 
-### .uncons `(list &optional (default nil))`
+#### .uncons `(list &optional (default nil))`
 
 Decompose a list into its head and tail. If the list is empty, returns default. If the list is non-empty, returns '(x, xs), where x is the head of the list and xs its tail.
 
