@@ -90,7 +90,7 @@ The `.intersperse` function takes an element and a list and 'intersperses' that 
 
 #### .intercalate `(sep list)`
 
-`.intercalate sep list` is equivalent to `(.concat (.intersperse sep list))`. It inserts the list `SEP` in between the lists in `LIST` and concatenates the result.
+`(.intercalate sep list)` is equivalent to `(.concat (.intersperse sep list))`. It inserts the list `SEP` in between the lists in `LIST` and concatenates the result.
 
 ```common-lisp
 (.intercalate '(0) '((1) (2) (3))) ;; => '(1 0 2 0 3)
