@@ -4,9 +4,18 @@
            :.last
            :.tail
            :.init
-           :.uncons))
+           :.uncons
+
+           ;; List transformations
+           :.map
+           :.intersperse
+           :.intercalate
+           ))
 
 (in-package :listopia)
+
+
+;;; Basic functions
 
 
 (defun .head (list &optional (default nil))
@@ -34,3 +43,25 @@
       (list (car list)
             (cdr list))
       default))
+
+
+;;; List transformations
+
+
+(defun .map (fn list)
+  (map 'list fn list))
+
+(defun .intersperse (sep list)
+  (labels ((internal-fn (sep list)
+             (if (null list)
+                 nil
+                 (append (list (car list) sep)
+                         (internal-fn sep (cdr list))))))
+    (.init (internal-fn sep list) nil)))
+
+(defun .intercalate (sep list)
+  (.concat (.intersperse sep list)))
+
+(defun .concat (list)
+  (apply #'concatenate
+         (cons 'list list)))

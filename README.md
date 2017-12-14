@@ -67,6 +67,37 @@ Decompose a list into its head and tail. If the list is empty, returns default. 
 (.uncons '() 666) ;; => 666
 ```
 
+### List transformations
+
+#### .map `(fn list)`
+
+Result - is the list obtained by applying `FN` to each element of `LIST`.
+
+```common-lisp
+(.map #'1+ '(1 2 3)) ;; => '(2 3 4)
+(.map #'1+ '()) ;; => nil
+```
+
+#### .intersperse `(sep lisp)`
+
+The `.intersperse` function takes an element and a list and 'intersperses' that element between the elements of the list.
+
+```common-lisp
+(.intersperse 0 '(1 2 3)) ;; => '(1 0 2 0 3)
+(.intersperse "," '("1" "2" "3")) ;; => '("1" "," "2" "," "3")
+(.intersperse 0 '()) ;; => nil
+```
+
+#### .intercalate `(sep list)`
+
+`.intercalate sep list` is equivalent to `(.concat (.intersperse sep list))`. It inserts the list `SEP` in between the lists in `LIST` and concatenates the result.
+
+```common-lisp
+(.intercalate '(0) '((1) (2) (3))) ;; => '(1 0 2 0 3)
+(.intercalate '(0) '((1) (2 3) (4 5 6))) ;; => '(1 0 2 3 0 4 5 6)
+(.intercalate '(0) '()') ;; => nil
+```
+
 ## Author
 
 * Ito Dimercel (xolcman@gmail.com)

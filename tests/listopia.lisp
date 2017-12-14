@@ -35,4 +35,16 @@
 (is 2 (length (.uncons '(1 2 3))))
 
 
+(is '() (.map #'1+ '()))
+(is '(2 3 4) (.map #'1+ '(1 2 3)))
+
+(is '() (.intersperse 0 '()))
+(is '(1) (.intersperse 0 '(1)))
+(is 5 (length (.intersperse #\, '(#\f #\o \#o))))
+
+(is '() (.intercalate '(0) '()))
+(is '(1) (.intercalate '(0) '((1))))
+(is 3 (length (.intercalate '(" ") '(("foo") ("bar")))))
+
+
 (finalize)
