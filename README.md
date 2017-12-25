@@ -98,6 +98,18 @@ The `.intersperse` function takes an element and a list and 'intersperses' that 
 (.intercalate '(0) '()') ;; => nil
 ```
 
+### Reducing lists (folds)
+
+#### .foldl `(fn init-val list)`
+
+Left-associative fold of a list.
+
+```common-lisp
+(.foldl (lambda (acc x) (append acc (list (1+ x))) '(1 2) '(2 3 4))) ;; => '(1 2 3 4 5)
+(.foldl (lambda (acc x) (cons x acc)) '() '(1 2 3)) ;; => '(3 2 1)
+(.foldl (lambda (acc x) (cons x acc)) '() '()) ;; => '()
+```
+
 ### Special folds
 
 #### .concat `(list)`

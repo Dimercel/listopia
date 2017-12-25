@@ -11,6 +11,9 @@
            :.intersperse
            :.intercalate
 
+           ;; Reducing lists (folds)
+           :.foldl
+
            ;; Special folds
            :.concat
            ))
@@ -64,6 +67,15 @@
 
 (defun .intercalate (sep list)
   (.concat (.intersperse sep list)))
+
+
+;;; Reducing lists (folds)
+
+
+(defun .foldl (fn init-val list)
+  (reduce fn
+          list
+          :initial-value init-val))
 
 
 ;;; Special folds

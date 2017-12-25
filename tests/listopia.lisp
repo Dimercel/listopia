@@ -9,6 +9,9 @@
 (plan nil)
 
 
+;;; Basic functions
+
+
 (is nil (.head '()))
 (is 666 (.head '() 666))
 (is 1 (.head '(1)))
@@ -35,6 +38,9 @@
 (is 2 (length (.uncons '(1 2 3))))
 
 
+;;; List transformations
+
+
 (is '() (.map #'1+ '()))
 (is '(2 3 4) (.map #'1+ '(1 2 3)))
 
@@ -45,6 +51,19 @@
 (is '() (.intercalate '(0) '()))
 (is '(1) (.intercalate '(0) '((1))))
 (is 3 (length (.intercalate '(" ") '(("foo") ("bar")))))
+
+
+;;; Reducing lists (folds)
+(is '() (.foldl #'null '() '()))
+(is '(1 2) (.foldl #'null '(1 2) '()))
+(is 5  (length (.foldl (lambda (acc x)
+                     (cons (1+ x) acc))
+                   '(2 1)
+                   '(2 3 4))))
+
+
+;;; Special folds
+
 
 (is 6 (length (.concat '((1) (2 3) (4 5 6)))))
 (is '() (.concat '(() () ())))
