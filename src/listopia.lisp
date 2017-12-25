@@ -10,6 +10,9 @@
            :.map
            :.intersperse
            :.intercalate
+
+           ;; Special folds
+           :.concat
            ))
 
 (in-package :listopia)
@@ -61,6 +64,10 @@
 
 (defun .intercalate (sep list)
   (.concat (.intersperse sep list)))
+
+
+;;; Special folds
+
 
 (defun .concat (list)
   (apply #'concatenate

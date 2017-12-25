@@ -98,6 +98,18 @@ The `.intersperse` function takes an element and a list and 'intersperses' that 
 (.intercalate '(0) '()') ;; => nil
 ```
 
+### Special folds
+
+#### .concat `(list)`
+
+The concatenation of all the elements of a container of lists.
+
+```common-lisp
+(.concat '((1) (2 3) (4 5 6))) ;; => '(1 2 3 4 5 6)
+(.concat '((1)) ;; => '(1)
+(.concat '(() ()) ;; => '()
+```
+
 ## Author
 
 * Ito Dimercel (xolcman@gmail.com)

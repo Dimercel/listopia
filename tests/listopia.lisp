@@ -46,5 +46,8 @@
 (is '(1) (.intercalate '(0) '((1))))
 (is 3 (length (.intercalate '(" ") '(("foo") ("bar")))))
 
+(is 6 (length (.concat '((1) (2 3) (4 5 6)))))
+(is '() (.concat '(() () ())))
+
 
 (finalize)
