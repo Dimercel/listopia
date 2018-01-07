@@ -54,12 +54,21 @@
 
 
 ;;; Reducing lists (folds)
+
+
 (is '() (.foldl #'null '() '()))
 (is '(1 2) (.foldl #'null '(1 2) '()))
-(is 5  (length (.foldl (lambda (acc x)
-                     (cons (1+ x) acc))
-                   '(2 1)
-                   '(2 3 4))))
+(is 5 (length (.foldl (lambda (acc x)
+                        (cons (1+ x) acc))
+                      '(2 1)
+                      '(2 3 4))))
+
+(is '() (.foldr #'null '() '()))
+(is '(1 2) (.foldr #'null '(1 2) '()))
+(is 5 (length (.foldr (lambda (x acc)
+                        (cons (1+ x) acc))
+                      '(2 1)
+                      '(4 3 2))))
 
 
 ;;; Special folds

@@ -13,6 +13,7 @@
 
            ;; Reducing lists (folds)
            :.foldl
+           :.foldr
 
            ;; Special folds
            :.concat
@@ -75,6 +76,12 @@
 (defun .foldl (fn init-val list)
   (reduce fn
           list
+          :initial-value init-val))
+
+(defun .foldr (fn init-val list)
+  (reduce fn
+          list
+          :from-end t
           :initial-value init-val))
 
 

@@ -110,6 +110,16 @@ Left-associative fold of a list.
 (.foldl (lambda (acc x) (cons x acc)) '() '()) ;; => '()
 ```
 
+#### .foldr `(fn init-val list)`
+
+Right-associative fold of a list.
+
+```common-lisp
+(.foldr (lambda (x acc) (append acc (list (1+ x))) '(1 2) '(4 3 2))) ;; => '(1 2 3 4 5)
+(.foldr (lambda (x acc) (cons x acc)) '() '(1 2 3)) ;; => '(1 2 3)
+(.foldr (lambda (x acc) (cons x acc)) '() '()) ;; => '()
+```
+
 ### Special folds
 
 #### .concat `(list)`
