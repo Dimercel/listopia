@@ -132,6 +132,40 @@ The concatenation of all the elements of a container of lists.
 (.concat '(() ()) ;; => '()
 ```
 
+#### .concat-map `(fn list)`
+
+Map a function over all the elements of a container and concatenate the resulting lists.
+
+```common-lisp
+(.concat-map #'list '(1 2 3) ;; => '(1 2 3)
+(.concat-map (lambda (x) 
+              (list x x)) 
+             '(1 2 3) ;; => '(1 1 2 2 3 3)
+(.concat-map #'null '()) ;; => NIL
+```
+
+#### .and `(list)`
+
+.and returns the conjunction of values in list.
+
+
+```common-lisp
+(.and '(t t) ;; => t
+(.and '(t nil) ;; => nil
+(.and '() ;; => t
+```
+
+#### .or `(list)`
+
+.or returns the disjunction of values in list.
+
+```common-lisp
+(.or '(t nil t) ;; => t
+(.or '(nil nil nil) ;; => nil
+(.or '() ;; => nil
+```
+
+
 ## Author
 
 * Ito Dimercel (xolcman@gmail.com)

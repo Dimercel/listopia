@@ -17,6 +17,9 @@
 
            ;; Special folds
            :.concat
+           :.concat-map
+           :.and
+           :.or
            ))
 
 (in-package :listopia)
@@ -91,3 +94,12 @@
 (defun .concat (list)
   (apply #'concatenate
          (cons 'list list)))
+
+(defun .concat-map (fn list)
+  (.concat (.map fn list)))
+
+(defun .and (list)
+  (notany #'null list))
+
+(defun .or (list)
+  (notevery #'null list))

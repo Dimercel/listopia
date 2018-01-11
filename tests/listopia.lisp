@@ -77,5 +77,14 @@
 (is 6 (length (.concat '((1) (2 3) (4 5 6)))))
 (is '() (.concat '(() () ())))
 
+(is 3 (length (.concat-map #'list '(1 2 3))))
+(is '() (.concat-map #'list '()))
+
+(ok (.and '(t t t)))
+(ok (not (.and '(nil nil))))
+(ok (.and '()))
+
+(ok (not (.or '(nil nil))))
+(ok (not (.or '())))
 
 (finalize)
