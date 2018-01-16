@@ -20,6 +20,8 @@
            :.concat-map
            :.and
            :.or
+           :.any
+           :.all
            ))
 
 (in-package :listopia)
@@ -103,3 +105,9 @@
 
 (defun .or (list)
   (notevery #'null list))
+
+(defun .any (fn list)
+  (some fn list))
+
+(defun .all (fn list)
+  (every fn list))

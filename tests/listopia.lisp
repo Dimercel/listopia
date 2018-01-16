@@ -87,4 +87,14 @@
 (ok (not (.or '(nil nil))))
 (ok (not (.or '())))
 
+(ok (.any #'numberp '(1 2 3)))
+(ok (.any #'numberp '("1" "2" 3)))
+(ok (not (.any #'numberp '("1" "2"))))
+(ok (not (.any #'numberp '())))
+
+(ok (.all #'numberp '(1 2 3)))
+(ok (not (.all #'numberp '(1 "2"))))
+(ok (not (.all #'numberp '("1" "2"))))
+(ok (.all #'numberp '()))
+
 (finalize)

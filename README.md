@@ -165,6 +165,24 @@ Map a function over all the elements of a container and concatenate the resultin
 (.or '()) ;; => nil
 ```
 
+#### .any `(fn list)`
+
+Determines whether any element of the list satisfies the predicate.
+
+```common-lisp
+(.any #'numberp '("1" "2" 3)) ;; => t
+(.any #'numberp '()) ;; => nil
+```
+
+#### .all `(fn list)`
+
+Determines whether all elements of the list satisfy the predicate.
+
+```common-lisp
+(.all #'numberp '(1 2 3)) ;; => t
+(.all #'numberp '(1 "2" 3)) ;; => nil
+(.all #'numberp '()) ;; => t
+```
 
 ## Author
 
