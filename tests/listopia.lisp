@@ -97,4 +97,17 @@
 (ok (not (.all #'numberp '("1" "2"))))
 (ok (.all #'numberp '()))
 
+(is 0 (.sum '()))
+(is 7 (.sum '(7)))
+
+(is 1 (.product '()))
+(is 7 (.product '(7)))
+
+(is-error (.maximum '()) 'error)
+(is 7 (.maximum '(7)))
+
+(is-error (.minimum '()) 'error)
+(is 7 (.minimum '(7)))
+
+
 (finalize)

@@ -22,7 +22,10 @@
            :.or
            :.any
            :.all
-           ))
+           :.sum
+           :.product
+           :.maximum
+           :.minimum))
 
 (in-package :listopia)
 
@@ -111,3 +114,15 @@
 
 (defun .all (fn list)
   (every fn list))
+
+(defun .sum (list)
+  (apply #'+ list))
+
+(defun .product (list)
+  (apply #'* list))
+
+(defun .maximum (list)
+  (apply #'max list))
+
+(defun .minimum (list)
+  (apply #'min list))

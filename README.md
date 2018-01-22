@@ -184,6 +184,43 @@ Determines whether all elements of the list satisfy the predicate.
 (.all #'numberp '()) ;; => t
 ```
 
+#### .sum `(list)`
+
+The sum function computes the sum of the numbers of a list.
+
+```common-lisp
+(.sum '(1 2 3)) ;; => 6
+(.sum '()) ;; => 0
+```
+
+#### .product `(list)`
+
+he product function computes the product of the numbers of a list.
+
+```common-lisp
+(.product '(1 2 3)) ;; => 6
+(.product '()) ;; => 1
+```
+
+#### .maximum `(list)`
+
+The largest element of a non-empty list.
+
+```common-lisp
+(.maximum '(1 2 3 4 5)) ;; => 5
+(.maximum '(1 2 3.0)) ;; => 3.0
+```
+
+#### .minimum `(list)`
+
+The least element of a non-empty list.
+
+```common-lisp
+(.minimum '(1 2 3 4 5)) ;; => 1
+(.minimum '(1.0 2 3)) ;; => 1.0
+```
+
+
 ## Author
 
 * Ito Dimercel (xolcman@gmail.com)
