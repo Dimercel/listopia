@@ -186,7 +186,7 @@ Determines whether all elements of the list satisfy the predicate.
 
 #### .sum `(list)`
 
-The sum function computes the sum of the numbers of a list.
+The .sum function computes the sum of the numbers of a list.
 
 ```common-lisp
 (.sum '(1 2 3)) ;; => 6
@@ -195,7 +195,7 @@ The sum function computes the sum of the numbers of a list.
 
 #### .product `(list)`
 
-he product function computes the product of the numbers of a list.
+The .product function computes the product of the numbers of a list.
 
 ```common-lisp
 (.product '(1 2 3)) ;; => 6
