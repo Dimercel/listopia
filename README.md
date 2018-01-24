@@ -227,7 +227,7 @@ The least element of a non-empty list.
 
 ## Copyright
 
-Copyright (c) 2017 Ito Dimercel (xolcman@gmail.com)
+Copyright (c) 2018 Ito Dimercel (xolcman@gmail.com)
 
 ## License
 
