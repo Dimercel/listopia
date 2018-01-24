@@ -110,4 +110,17 @@
 (is 7 (.minimum '(7)))
 
 
+;;; Building lists
+
+
+;;; Scans
+
+
+(is '(1) (.scanl #'+ 1 '()))
+(is 4 (length (.scanl #'+ 1 '(2 3 4))))
+
+(is '() (.scanl1 #'+ '()))
+(is 4 (length (.scanl1 #'+ '(1 2 3 4))))
+
+
 (finalize)

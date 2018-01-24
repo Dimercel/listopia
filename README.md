@@ -220,6 +220,28 @@ The least element of a non-empty list.
 (.minimum '(1.0 2 3)) ;; => 1.0
 ```
 
+### Special folds
+
+### Scans
+
+#### .scanl `(fn init-value list)`
+
+.scanl is similar to foldl, but returns a list of successive reduced values from the left:
+
+`(.scanl fn init '(x1 x2 ...)) == (list init (fn init x1) (fn (fn init x1) x2) ...)`
+
+```common-lisp
+(.scanl #'+ 1 '(2 3 4)) ;; => '(1 3 6 10)
+(.scanl #'+ 1 '()) ;; => '(1)
+```
+#### .scanl1 `(fn list)`
+
+.scanl1 is a variant of .scanl that has no starting value argument.
+
+```common-lisp
+(.scanl1 #'+ '(1 2 3 4)) ;; => '(1 3 6 10)
+(.scanl1 #'+ '()) ;; => nil
+```
 
 ## Author
 

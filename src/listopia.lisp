@@ -25,7 +25,13 @@
            :.sum
            :.product
            :.maximum
-           :.minimum))
+           :.minimum
+
+           ;; Building lists
+           ;; Scans
+           :.scanl
+           :.scanl1
+   ))
 
 (in-package :listopia)
 
@@ -126,3 +132,22 @@
 
 (defun .minimum (list)
   (apply #'min list))
+
+
+;;; Building lists
+
+
+;;; Scans
+
+
+(defun .scanl (fn init-val list)
+  (if (null list)
+      (list init-val)
+      (cons init-val
+            (.scanl fn
+                    (funcall fn init-val (car list))
+                    (cdr list)))))
+
+(defun .scanl1 (fn list)
+  (unless (null list)
+    (.scanl fn (car list) (cdr list))))
