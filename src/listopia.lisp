@@ -31,6 +31,8 @@
            ;; Scans
            :.scanl
            :.scanl1
+           :.scanr
+           :.scanr1
    ))
 
 (in-package :listopia)
@@ -151,3 +153,16 @@
 (defun .scanl1 (fn list)
   (unless (null list)
     (.scanl fn (car list) (cdr list))))
+
+(defun .scanr (fn init-val list)
+  (if (null list)
+      (list init-val)
+      (append
+       (.scanr fn
+               (funcall fn init-val (.last list))
+               (.init list))
+       (list init-val))))
+
+(defun .scanr1 (fn list)
+  (unless (null list)
+    (.scanr fn (.last list) (.init list))))

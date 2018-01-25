@@ -243,6 +243,24 @@ The least element of a non-empty list.
 (.scanl1 #'+ '()) ;; => nil
 ```
 
+#### .scanr `(fn init-value list)`
+
+.scanr is the right-to-left dual of .scanl. 
+
+```common-lisp
+(.scanr #'+ 1 '(2 3 4)) ;; => '(10 8 5 1)
+(.scanr #'+ 1 '()) ;; => '(1)
+```
+#### .scanr1 `(fn list)`
+
+.scanr1 is a variant of .scanr that has no starting value argument.
+
+```common-lisp
+(.scanr1 #'+ '(2 3 4 1)) ;; => '(10 8 5 1)
+(.scanr1 #'+ '(5 4 3 2 1)) ;; => '(15 10 6 3 1)
+(.scanr1 #'+ '()) ;; => nil
+```
+
 ## Author
 
 * Ito Dimercel (xolcman@gmail.com)

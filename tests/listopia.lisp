@@ -122,5 +122,11 @@
 (is '() (.scanl1 #'+ '()))
 (is 4 (length (.scanl1 #'+ '(1 2 3 4))))
 
+(is '(1) (.scanr #'+ 1 '()))
+(is 4 (length (.scanr #'+ 1 '(2 3 4))))
+
+(is '() (.scanr1 #'+ '()))
+(is 4 (length (.scanr1 #'+ '(1 2 3 4))))
+
 
 (finalize)
