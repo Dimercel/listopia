@@ -251,6 +251,7 @@ The least element of a non-empty list.
 (.scanr #'+ 1 '(2 3 4)) ;; => '(10 8 5 1)
 (.scanr #'+ 1 '()) ;; => '(1)
 ```
+
 #### .scanr1 `(fn list)`
 
 .scanr1 is a variant of .scanr that has no starting value argument.
@@ -259,6 +260,24 @@ The least element of a non-empty list.
 (.scanr1 #'+ '(2 3 4 1)) ;; => '(10 8 5 1)
 (.scanr1 #'+ '(5 4 3 2 1)) ;; => '(15 10 6 3 1)
 (.scanr1 #'+ '()) ;; => nil
+```
+
+#### .map-accum-l `(fn init-val list)`
+
+.map-accum-l applies a function to each element of a list, passing an accumulating parameter from left to right, and returning a final value of this accumulator together with the new structure.
+
+```common-lisp
+(.map-accum-l (lambda (acc x) (list acc (+ x acc))) 1 '(1 2 3)) ;; => '(1 (2 3 4))
+(.map-accum-l (lambda (acc x) (list (1+ acc) (+ x acc))) 1 '(1 2 3)) ;; => '(4 (2 4 6))
+```
+
+#### .map-accum-r `(fn init-val list)`
+
+.map-accum-r applies a function to each element of a list, passing an accumulating parameter from right to left, and returning a final value of this accumulator together with the new structure.
+
+```common-lisp
+(.map-accum-r (lambda (acc x) (list acc (+ x acc))) 1 '(1 2 3)) ;; => '(1 (2 3 4))
+(.map-accum-r (lambda (acc x) (list (1+ acc) (+ x acc))) 1 '(1 2 3)) ;; => '(4 (4 4 4))
 ```
 
 ## Author

@@ -33,6 +33,10 @@
            :.scanl1
            :.scanr
            :.scanr1
+
+           ;; Accumulating maps
+           :.map-accum-l
+           :.map-accum-r
    ))
 
 (in-package :listopia)
@@ -166,3 +170,27 @@
 (defun .scanr1 (fn list)
   (unless (null list)
     (.scanr fn (.last list) (.init list))))
+
+
+;; Accumulating maps
+
+
+(defun .map-accum-l (fn init-val list)
+  (.foldl
+   (lambda (acc x)
+     (let ((iter (funcall fn (first acc) x)))
+       (list (first iter)
+             (append (second acc)
+                     (list (second iter))))))
+   (list init-val nil)
+   list))
+
+(defun .map-accum-r (fn init-val list)
+  (.foldr
+   (lambda (x acc)
+     (let ((iter (funcall fn (first acc) x)))
+       (list (first iter)
+             (cons (second iter)
+                   (second acc)))))
+   (list init-val nil)
+   list))

@@ -129,4 +129,19 @@
 (is 4 (length (.scanr1 #'+ '(1 2 3 4))))
 
 
+;;; Accumulating maps
+
+
+(is '(1 nil) (.map-accum-l #'null 1 '()))
+(is 2 (length (.map-accum-l (lambda (acc x)
+                              (list acc (+ acc x)))
+                            1
+                            '(2 3 4))))
+
+(is '(1 nil) (.map-accum-r #'null 1 '()))
+(is 2 (length (.map-accum-r (lambda (acc x)
+                              (list acc (+ acc x)))
+                            1
+                            '(2 3 4))))
+
 (finalize)
