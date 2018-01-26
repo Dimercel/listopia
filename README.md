@@ -262,6 +262,8 @@ The least element of a non-empty list.
 (.scanr1 #'+ '()) ;; => nil
 ```
 
+### Accumulating maps
+
 #### .map-accum-l `(fn init-val list)`
 
 .map-accum-l applies a function to each element of a list, passing an accumulating parameter from left to right, and returning a final value of this accumulator together with the new structure.
