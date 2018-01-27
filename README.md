@@ -110,6 +110,15 @@ Left-associative fold of a list.
 (.foldl (lambda (acc x) (cons x acc)) '() '()) ;; => '()
 ```
 
+#### .foldl1 `(fn list)`
+
+A variant of .foldl that has no base case, and thus may only be applied to non-empty lists.
+
+```common-lisp
+(.foldl1 #'+ '(1 2 3)) ;; => 6
+(.foldl1 #'list '(1 2 3 4)) ;; => '(((1 2) 3) 4)
+```
+
 #### .foldr `(fn init-val list)`
 
 Right-associative fold of a list.
@@ -118,6 +127,15 @@ Right-associative fold of a list.
 (.foldr (lambda (x acc) (append acc (list (1+ x))) '(1 2) '(4 3 2))) ;; => '(1 2 3 4 5)
 (.foldr (lambda (x acc) (cons x acc)) '() '(1 2 3)) ;; => '(1 2 3)
 (.foldr (lambda (x acc) (cons x acc)) '() '()) ;; => '()
+```
+
+#### .foldr1 `(fn list)`
+
+A variant of .foldr that has no base case, and thus may only be applied to non-empty lists.
+
+```common-lisp
+(.foldr1 #'+ '(1 2 3)) ;; => 6
+(.foldr1 #'list '(1 2 3 4)) ;; => '(1 (2 (3 4)))
 ```
 
 ### Special folds

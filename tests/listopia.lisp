@@ -63,12 +63,20 @@
                       '(2 1)
                       '(2 3 4))))
 
+(is-error (.foldl1 #'+ '()) 'simple-error)
+(ok (numberp (.foldl1 #'+ '(1 2 3))))
+(is (.foldl #'- 1 '(2 3)) (.foldl1 #'- '(1 2 3)))
+
 (is '() (.foldr #'null '() '()))
 (is '(1 2) (.foldr #'null '(1 2) '()))
 (is 5 (length (.foldr (lambda (x acc)
                         (cons (1+ x) acc))
                       '(2 1)
                       '(4 3 2))))
+
+(is-error (.foldr1 #'+ '()) 'simple-error)
+(ok (numberp (.foldr1 #'+ '(1 2 3))))
+(is (.foldr #'- 3 '(1 2)) (.foldr1 #'- '(1 2 3)))
 
 
 ;;; Special folds

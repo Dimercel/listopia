@@ -13,7 +13,9 @@
 
            ;; Reducing lists (folds)
            :.foldl
+           :.foldl1
            :.foldr
+           :.foldr1
 
            ;; Special folds
            :.concat
@@ -98,11 +100,21 @@
           list
           :initial-value init-val))
 
+(defun .foldl1 (fn list)
+  (if (> (length list) 1)
+      (.foldl fn (car list) (cdr list))
+      (error "empty list")))
+
 (defun .foldr (fn init-val list)
   (reduce fn
           list
           :from-end t
           :initial-value init-val))
+
+(defun .foldr1 (fn list)
+  (if (> (length list) 1)
+      (.foldr fn (.last list) (.init list))
+      (error "empty list")))
 
 
 ;;; Special folds
