@@ -8,7 +8,7 @@
 |#
 
 (defsystem "listopia"
-  :version "0.3.0"
+  :version "0.4.0"
   :author "Ito Dimercel"
   :license "LLGPL"
   :depends-on ()

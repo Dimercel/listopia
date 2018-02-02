@@ -337,6 +337,17 @@ Returned list has a size equal to parameter SIZE.
 (.replicate 0 :foo) ;; => nil
 ```
 
+#### .cycle `(list size)`
+
+.cycle ties a finite list into a circular one, or equivalently.
+
+Returned list has a size equal to parameter SIZE.
+
+```common-lisp
+(.cycle '(1 2 3) 5) ;; => '(1 2 3 1 2)
+(.cycle '(1 2 3) 0) ;; => nil
+```
+
 ## Author
 
 * Ito Dimercel (xolcman@gmail.com)

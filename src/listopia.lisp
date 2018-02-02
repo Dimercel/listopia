@@ -44,6 +44,7 @@
            :.iterate
            :.repeat
            :.replicate
+           :.cycle
    ))
 
 (in-package :listopia)
@@ -225,3 +226,11 @@
 
 (defun .replicate (size init-val)
   (.repeat init-val size))
+
+(defun .cycle (list size)
+  (when (null list)
+    (error "empty list"))
+  (if (< size (length list))
+      (subseq list 0 size)
+      (append list
+              (.cycle list (- size (length list))))))
