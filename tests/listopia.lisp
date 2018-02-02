@@ -162,4 +162,7 @@
 (is '() (.repeat 1 0))
 (is 4 (length (.repeat 1 4)))
 
+(is '() (.replicate 0 1))
+(is 4 (length (.replicate 4 1)))
+
 (finalize)
