@@ -39,6 +39,9 @@
            ;; Accumulating maps
            :.map-accum-l
            :.map-accum-r
+
+           ;; Infinite lists
+           :.iterate
    ))
 
 (in-package :listopia)
@@ -206,3 +209,11 @@
                    (second acc)))))
    (list init-val nil)
    list))
+
+
+;; Infinite lists
+
+
+(defun .iterate (fn init-val size)
+  (when (> size 0)
+    (cons init-val (.iterate fn (funcall fn init-val) (1- size)))))

@@ -152,4 +152,11 @@
                             1
                             '(2 3 4))))
 
+
+;; Infinite lists
+
+
+(is '() (.iterate #'1+ 1 0))
+(is 4 (length (.iterate #'1+ 1 4)))
+
 (finalize)
