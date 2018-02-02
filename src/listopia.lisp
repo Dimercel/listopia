@@ -42,6 +42,7 @@
 
            ;; Infinite lists
            :.iterate
+           :.repeat
    ))
 
 (in-package :listopia)
@@ -217,3 +218,6 @@
 (defun .iterate (fn init-val size)
   (when (> size 0)
     (cons init-val (.iterate fn (funcall fn init-val) (1- size)))))
+
+(defun .repeat (init-val size)
+  (make-list size :initial-element init-val))

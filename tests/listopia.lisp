@@ -159,4 +159,7 @@
 (is '() (.iterate #'1+ 1 0))
 (is 4 (length (.iterate #'1+ 1 4)))
 
+(is '() (.repeat 1 0))
+(is 4 (length (.repeat 1 4)))
+
 (finalize)

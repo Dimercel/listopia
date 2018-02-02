@@ -305,6 +305,7 @@ The least element of a non-empty list.
 #### .iterate `(fn init-val size)`
 
 (.iterate fn val) returns an list of repeated applications of fn to val:
+
 `(.iterate f x size) ==  (list x (f x) (f (f x)) ...)`
 
 Returned list has a size equal to parameter SIZE.
@@ -314,6 +315,17 @@ Returned list has a size equal to parameter SIZE.
 (.iterate #'1+ 0 0) ;; => nil
 ```
 
+#### .repeat `(init-val size)`
+
+.repeat x is an list, with x the value of every element.
+
+Returned list has a size equal to parameter SIZE.
+
+```common-lisp
+(.repeat 1 4) ;; => '(1 1 1 1)
+(.repeat :foo 2) ;; => '(:foo :foo)
+(.repeat :foo 0) ;; => nil
+```
 
 ## Author
 
