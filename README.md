@@ -1,6 +1,6 @@
 # Listopia
 
- This is port of Haskell package [Data.List](https://hackage.haskell.org/package/base-4.10.1.0/docs/Data-List.html)
+ This is no official port of Haskell package [Data.List](https://hackage.haskell.org/package/base-4.10.1.0/docs/Data-List.html)
 
 ## Usage
 
@@ -347,6 +347,18 @@ Returned list has a size equal to parameter SIZE.
 (.cycle '(1 2 3) 5) ;; => '(1 2 3 1 2)
 (.cycle '(1 2 3) 0) ;; => nil
 ```
+
+### Unfolding
+
+#### .unfoldr `(fn init-val)`
+
+The .unfoldr function is a dual to .foldr: while .foldr reduces a list to a summary value, .unfoldr builds a list from a seed value. The function takes the element and returns NIL if it is done producing the list or returns '(a b), in which case, a is a prepended to the list and b is used as the next element in a recursive call.
+
+```common-lisp
+(.unfoldr (lambda (x) (if (= x 0) nil (list x (1- x)))) 10) ;; => '(10 9 8 7 6 5 4 3 2 1)
+(.unfoldr (lambda (x) (if (= x 6) nil (list (expt 2 x) (1+ x)))) 1) ;; => '(2 4 8 16 32)
+```
+
 
 ## Author
 

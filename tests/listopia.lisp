@@ -169,4 +169,16 @@
 (is '() (.cycle '(1 2 3) 0))
 (is 5 (length (.cycle '(1 2 3) 5)))
 
+
+;; Unfolding
+
+
+(is (.iterate #'1+ 0 4) (.unfoldr (lambda (x)
+                                    (if (< x 4)
+                                        (list x (1+ x))))
+                                  0))
+(is '() (.unfoldr (lambda (x) (declare (ignore x))
+                    nil) 0))
+
+
 (finalize)

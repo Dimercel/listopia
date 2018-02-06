@@ -45,6 +45,9 @@
            :.repeat
            :.replicate
            :.cycle
+
+           ;; Unfolding
+           :.unfoldr
    ))
 
 (in-package :listopia)
@@ -234,3 +237,12 @@
       (subseq list 0 size)
       (append list
               (.cycle list (- size (length list))))))
+
+
+;; Unfolding
+
+
+(defun .unfoldr (fn init-val)
+  (let ((iter-val (funcall fn init-val)))
+    (when iter-val
+      (cons (first iter-val) (.unfoldr fn (second iter-val))))))
