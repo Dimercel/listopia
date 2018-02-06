@@ -359,6 +359,35 @@ The .unfoldr function is a dual to .foldr: while .foldr reduces a list to a summ
 (.unfoldr (lambda (x) (if (= x 6) nil (list (expt 2 x) (1+ x)))) 1) ;; => '(2 4 8 16 32)
 ```
 
+### Sublists
+
+
+### Extracting sublists
+
+#### .take `(count list)`
+
+`(.take n xs)` returns the prefix of xs of length n, or xs itself if n > length xs.
+
+```common-lisp
+(.take 3 '(1 2 3 4 5)) ;; => '(1 2 3)
+(.take 3 '(1 2)) ;; => '(1 2)
+(.take 3 '()) ;; => nil
+(.take -1 '(1 2)) ;; => nil
+(.take 0 '(1 2)) ;; => nil
+```
+
+#### .drop `(count list)`
+
+`(.drop n xs)` returns the suffix of xs after the first n elements, or NIL if n > length xs.
+
+```common-lisp
+(.drop 3 '(1 2 3 4 5)) ;; => '(4 5)
+(.drop 3 '(1 2)) ;; => nil
+(.drop 3 '()) ;; => nil
+(.drop -1 '(1 2)) ;; => '(1 2)
+(.drop 0 '(1 2)) ;; => '(1 2)
+```
+
 
 ## Author
 

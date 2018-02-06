@@ -48,6 +48,11 @@
 
            ;; Unfolding
            :.unfoldr
+
+           ;; Sublists
+           ;; Extracting sublists
+           :.take
+           :.drop
    ))
 
 (in-package :listopia)
@@ -246,3 +251,20 @@
   (let ((iter-val (funcall fn init-val)))
     (when iter-val
       (cons (first iter-val) (.unfoldr fn (second iter-val))))))
+
+
+;; Sublists
+
+
+;; Extracting sublists
+
+
+(defun .take (count list)
+  (when (< count 0) (return-from .take nil))
+  (if (<= count (length list))
+      (subseq list 0 count)
+      list))
+
+(defun .drop (count list)
+  (when (< count 0) (return-from .drop list))
+  (nthcdr count list))

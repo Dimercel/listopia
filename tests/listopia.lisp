@@ -181,4 +181,20 @@
                     nil) 0))
 
 
+;; Sublists
+
+
+;; Extracting sublists
+
+
+(is '() (.take 0 '(1 2 3)))
+(is '() (.take -1 '(1 2 3)))
+(is 4 (length (.take 10 '(1 2 3 4))))
+
+(is '() (.drop 3 '(1 2)))
+(is '() (.drop 3 '()))
+(is '(1 2) (.drop -1 '(1 2)))
+(is '(1 2) (.drop 0 '(1 2)))
+
+
 (finalize)
