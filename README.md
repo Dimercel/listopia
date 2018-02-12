@@ -403,11 +403,12 @@ The .unfoldr function is a dual to .foldr: while .foldr reduces a list to a summ
 
 #### .take-while `(pred list)`
 
-.take-while, applied to a predicate PRED and a LIST, returns the longest prefix (possibly empty) of LIST of elements that satisfy PRED:
+.take-while, applied to a predicate PRED and a LIST, returns the longest prefix (possibly empty) of LIST of elements that satisfy PRED.
 
 ```common-lisp
 (.take-while #'evenp '(1 2 3 4)) ;; => '()
 (.take-while #'evenp '(2 4 5 6)) ;; => '(2 4)
+```
 
 
 ## Author
