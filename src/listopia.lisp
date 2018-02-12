@@ -53,6 +53,8 @@
            ;; Extracting sublists
            :.take
            :.drop
+           :.split-at
+           :.take-while
    ))
 
 (in-package :listopia)
@@ -268,3 +270,14 @@
 (defun .drop (count list)
   (when (< count 0) (return-from .drop list))
   (nthcdr count list))
+
+(defun .split-at (count list)
+  (list (.take count list)
+        (.drop count list)))
+
+(defun .take-while (pred list)
+  (if (null list)
+      '()
+      (when (funcall pred (first list))
+        (cons (first list)
+              (.take-while pred (cdr list))))))

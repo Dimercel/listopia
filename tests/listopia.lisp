@@ -196,5 +196,12 @@
 (is '(1 2) (.drop -1 '(1 2)))
 (is '(1 2) (.drop 0 '(1 2)))
 
+(is 2 (length (.split-at 3 '(1 2 3 4 5))))
+(is (.split-at 3 '(1 2 3)) (.split-at 5 '(1 2 3)))
+(is (.split-at 0 '(1 2 3)) (.split-at -1 '(1 2 3)))
+
+(is 2 (length (.take-while #'null '(nil nil 1 2 nil))))
+(is '() (.take-while #'null '()))
+
 
 (finalize)

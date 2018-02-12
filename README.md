@@ -388,6 +388,27 @@ The .unfoldr function is a dual to .foldr: while .foldr reduces a list to a summ
 (.drop 0 '(1 2)) ;; => '(1 2)
 ```
 
+#### .split-at `(count list)`
+
+`splitAt n xs` returns a list where first element is xs prefix of length n and second element is the remainder of the list.
+
+```common-lisp
+(.split-at 3 '(1 2 3 4 5)) ;; =>  '((1 2 3) (4 5))
+(.split-at 1 '(1 2 3) ;; => '((1) (2 3))
+(.split-at 3 '(1 2 3) ;; => '((1 2 3) nil)
+(.split-at 4 '(1 2 3) ;; => '((1 2 3) ())
+(.split-at 0 '(1 2 3) ;; => '(nil (1 2 3))
+(.spli-at -1 '(1 2 3) ;; => '(nil (1 2 3))
+```
+
+#### .take-while `(pred list)`
+
+.take-while, applied to a predicate PRED and a LIST, returns the longest prefix (possibly empty) of LIST of elements that satisfy PRED:
+
+```common-lisp
+(.take-while #'evenp '(1 2 3 4)) ;; => '()
+(.take-while #'evenp '(2 4 5 6)) ;; => '(2 4)
+
 
 ## Author
 
