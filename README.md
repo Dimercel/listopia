@@ -10,6 +10,10 @@
 
 ## Installation
 
+```common-lisp
+(ql:quickload :cl-rules)
+```
+
 
 ## Functions
 
