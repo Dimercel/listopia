@@ -203,5 +203,8 @@
 (is 2 (length (.take-while #'null '(nil nil 1 2 nil))))
 (is '() (.take-while #'null '()))
 
+(is 2 (length (.drop-while #'numberp '(1 2 3 "foo" "bar"))))
+(is '() (.drop-while #'numberp '(1 2 3)))
+
 
 (finalize)

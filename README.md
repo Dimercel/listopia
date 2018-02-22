@@ -414,6 +414,16 @@ The .unfoldr function is a dual to .foldr: while .foldr reduces a list to a summ
 (.take-while #'evenp '(2 4 5 6)) ;; => '(2 4)
 ```
 
+#### .drop-while `(pred list)`
+
+`.drop-while p xs` returns the suffix remaining after `.take-while p xs`.
+
+```common-lisp
+(.drop-while #'numberp '(1 2 3 nil nil 1 2 3)) ;; => '(nil nil 1 2 3)
+(.drop-while #'numberp '(1 2 3)) ;; => '()
+(.drop-while #'stringp '(1 2 3)) ;; => '(1 2 3)
+```
+
 
 ## Author
 

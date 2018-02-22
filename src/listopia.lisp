@@ -55,6 +55,7 @@
            :.drop
            :.split-at
            :.take-while
+           :.drop-while
    ))
 
 (in-package :listopia)
@@ -276,8 +277,13 @@
         (.drop count list)))
 
 (defun .take-while (pred list)
-  (if (null list)
-      '()
+  (unless (null list)
       (when (funcall pred (first list))
         (cons (first list)
               (.take-while pred (cdr list))))))
+
+(defun .drop-while (pred list)
+  (unless (null list)
+    (if (funcall pred (first list))
+        (.drop-while pred (cdr list))
+        list)))
