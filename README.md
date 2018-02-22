@@ -11,7 +11,7 @@
 ## Installation
 
 ```common-lisp
-(ql:quickload :cl-rules)
+(ql:quickload :listopia)
 ```
 
 
@@ -402,7 +402,7 @@ The .unfoldr function is a dual to .foldr: while .foldr reduces a list to a summ
 (.split-at 3 '(1 2 3) ;; => '((1 2 3) nil)
 (.split-at 4 '(1 2 3) ;; => '((1 2 3) ())
 (.split-at 0 '(1 2 3) ;; => '(nil (1 2 3))
-(.spli-at -1 '(1 2 3) ;; => '(nil (1 2 3))
+(.split-at -1 '(1 2 3) ;; => '(nil (1 2 3))
 ```
 
 #### .take-while `(pred list)`
