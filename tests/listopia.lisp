@@ -206,5 +206,7 @@
 (is 2 (length (.drop-while #'numberp '(1 2 3 "foo" "bar"))))
 (is '() (.drop-while #'numberp '(1 2 3)))
 
+(is 2 (length (.drop-while-end #'numberp '("foo" "bar" 1 2 3))))
+(is '() (.drop-while-end #'numberp '(1 2 3)))
 
 (finalize)

@@ -56,6 +56,7 @@
            :.split-at
            :.take-while
            :.drop-while
+           :.drop-while-end
    ))
 
 (in-package :listopia)
@@ -287,3 +288,11 @@
     (if (funcall pred (first list))
         (.drop-while pred (cdr list))
         list)))
+
+(defun .drop-while-end (pred list)
+  (.foldr (lambda (x acc)
+            (if (and (funcall pred x) (null acc))
+                '()
+                (cons x acc)))
+          '()
+          list))

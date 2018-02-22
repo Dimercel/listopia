@@ -424,6 +424,15 @@ The .unfoldr function is a dual to .foldr: while .foldr reduces a list to a summ
 (.drop-while #'stringp '(1 2 3)) ;; => '(1 2 3)
 ```
 
+#### .drop-while-end `(pred list)`
+
+The .drop-while-end function drops the largest suffix of a list in which the given predicate holds for all elements.
+
+```common-lisp
+(.drop-while-end #'numberp '("foo" "bar" 1 2 3)) ;; => '("foo" "bar")
+(.drop-while-end #'numberp '("foo" 1 2 3 "bar")) ;; => '("foo" 1 2 3 "bar")
+(.drop-while-end #'numberp '(1 2 3)) ;; => '()
+```
 
 ## Author
 
