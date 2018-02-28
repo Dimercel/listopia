@@ -434,6 +434,26 @@ The .drop-while-end function drops the largest suffix of a list in which the giv
 (.drop-while-end #'numberp '(1 2 3)) ;; => '()
 ```
 
+#### .span `(pred list)`
+
+.span, applied to a predicate PRED and a LIST, returns a list where first element is longest prefix (possibly empty) of LIST of elements that satisfy PRED and second element is the remainder of the list.
+
+```common-lisp
+(.span (lambda (x) (< x 3)) '(1 2 3 4 1 2 3 4)) ;; => '((1 2) (3 4 1 2 3 4))
+(.span (lambda (x) (< x 9)) '(1 2 3)) ;; => '((1 2 3) ())
+(.span (lambda (x) (< x 0)) '(1 2 3)) ;; => '(() (1 2 3))
+```
+
+#### .break `(pred list)`
+
+.break, applied to a predicate PRED and a LIST, returns a list where first element is longest prefix (possibly empty) of LIST of elements that do not satisfy PRED and second element is the remainder of the list
+
+```common-lisp
+(.break (lambda (x) (> x 3)) '(1 2 3 4 1 2 3 4)) ;; => '((1 2 3) (4 1 2 3 4))
+(.break (lambda (x) (< x 9)) '(1 2 3)) ;; => '(() (1 2 3))
+(.break (lambda (x) (> x 9)) '(1 2 3)) ;; => '((1 2 3) ())
+```
+
 ## Author
 
 * Ito Dimercel (xolcman@gmail.com)

@@ -57,6 +57,8 @@
            :.take-while
            :.drop-while
            :.drop-while-end
+           :.span
+           :.break
    ))
 
 (in-package :listopia)
@@ -296,3 +298,9 @@
                 (cons x acc)))
           '()
           list))
+
+(defun .span (pred list)
+  (list (.take-while pred list) (.drop-while pred list)))
+
+(defun .break (pred list)
+  (.span (lambda (x) (not (funcall pred x))) list))

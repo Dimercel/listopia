@@ -209,4 +209,13 @@
 (is 2 (length (.drop-while-end #'numberp '("foo" "bar" 1 2 3))))
 (is '() (.drop-while-end #'numberp '(1 2 3)))
 
+(is 2 (length (.span #'numberp '(1 2 "three" "four"))))
+(is '(nil nil) (.span #'numberp '()))
+(is (list (.take-while #'numberp '(1 2 "three" "four"))
+          (.drop-while #'numberp '(1 2 "three" "four")))
+    (.span #'numberp '(1 2 "three" "four")))
+
+(is 2 (length (.break #'numberp '(1 2 "three" "four"))))
+(is '(nil nil) (.break #'numberp '()))
+
 (finalize)
