@@ -454,6 +454,17 @@ The .drop-while-end function drops the largest suffix of a list in which the giv
 (.break (lambda (x) (> x 9)) '(1 2 3)) ;; => '((1 2 3) ())
 ```
 
+#### .strip-prefix `(prefix list &optional (default nil))`
+
+The .strip-prefix function drops the given prefix from a list. It returns DEFAULT value if the list did not start with the prefix given, or the list after the prefix, if it does.
+
+```common-lisp
+(.strip-prefix '(1 2) '(1 2 3 4)) ;; => '(3 4)
+(.strip-prefix '(1 2) '(1 2)) ;; => '()
+(.strip-prefix '(1 2) '(3 4 1 2)) ;; => NIL
+(.strip-prefix '(1 2) '(3 4 1 2 5 6)) ;; => NIL
+```
+
 ## Author
 
 * Ito Dimercel (xolcman@gmail.com)

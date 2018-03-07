@@ -218,4 +218,9 @@
 (is 2 (length (.break #'numberp '(1 2 "three" "four"))))
 (is '(nil nil) (.break #'numberp '()))
 
+(is 3 (length (.strip-prefix '(1 2) '(1 2 3 4 5))))
+(is 42 (.strip-prefix '(1 2) '() 42))
+(is 3 (length (.strip-prefix '() '(1 2 3))))
+
+
 (finalize)

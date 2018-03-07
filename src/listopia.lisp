@@ -59,6 +59,7 @@
            :.drop-while-end
            :.span
            :.break
+           :.strip-prefix
    ))
 
 (in-package :listopia)
@@ -304,3 +305,8 @@
 
 (defun .break (pred list)
   (.span (lambda (x) (not (funcall pred x))) list))
+
+(defun .strip-prefix (prefix list &optional (default nil))
+  (if (equal (.take (length prefix) list) prefix)
+      (.drop (length prefix) list)
+      default))
