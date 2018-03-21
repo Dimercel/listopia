@@ -61,6 +61,7 @@
            :.break
            :.strip-prefix
            :.inits
+           :.tails
    ))
 
 (in-package :listopia)
@@ -317,3 +318,9 @@
     (dotimes (n (length list))
       (setf result (cons (subseq list 0 n) result)))
     (reverse (cons list result))))
+
+(defun .tails (list)
+  (let ((result nil))
+    (dotimes (n (length list))
+      (setf result (cons (subseq list n) result)))
+    (reverse (cons nil result))))

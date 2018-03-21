@@ -226,4 +226,8 @@
 (is '(nil) (.inits '()))
 (ok (null (first (.inits '(1 2 3)))))
 
+(is 4 (length (.tails '(1 2 3))))
+(is '(nil) (.tails '()))
+(ok (null (.last (.tails '(1 2 3)))))
+
 (finalize)

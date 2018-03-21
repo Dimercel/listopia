@@ -474,6 +474,15 @@ The .inits function returns all initial segments of the argument, shortest first
 (.inits '()) ;; => '(nil)
 ```
 
+#### .tails `(list)`
+
+The .tails function returns all final segments of the argument, longest first.
+
+```common-lisp
+(.tails '(1 2 3)) ;; => '((1 2 3) (2 3) (3) nil)
+(.tails '()) ;; => '(nil)
+```
+
 ## Author
 
 * Ito Dimercel (xolcman@gmail.com)
