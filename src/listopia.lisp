@@ -60,6 +60,7 @@
            :.span
            :.break
            :.strip-prefix
+           :.inits
    ))
 
 (in-package :listopia)
@@ -310,3 +311,9 @@
   (if (equal (.take (length prefix) list) prefix)
       (.drop (length prefix) list)
       default))
+
+(defun .inits (list)
+  (let ((result nil))
+    (dotimes (n (length list))
+      (setf result (cons (subseq list 0 n) result)))
+    (reverse (cons list result))))

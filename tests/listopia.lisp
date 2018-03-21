@@ -222,5 +222,8 @@
 (is 42 (.strip-prefix '(1 2) '() 42))
 (is 3 (length (.strip-prefix '() '(1 2 3))))
 
+(is 4 (length (.inits '(1 2 3))))
+(is '(nil) (.inits '()))
+(ok (null (first (.inits '(1 2 3)))))
 
 (finalize)

@@ -465,6 +465,15 @@ The .strip-prefix function drops the given prefix from a list. It returns DEFAUL
 (.strip-prefix '(1 2) '(3 4 1 2 5 6)) ;; => NIL
 ```
 
+#### .inits `(list)`
+
+The .inits function returns all initial segments of the argument, shortest first.
+
+```common-lisp
+(.inits '(1 2 3)) ;; => '(nil (1) (1 2) (1 2 3))
+(.inits '()) ;; => '(nil)
+```
+
 ## Author
 
 * Ito Dimercel (xolcman@gmail.com)
