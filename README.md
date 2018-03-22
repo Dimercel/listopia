@@ -242,7 +242,7 @@ The least element of a non-empty list.
 (.minimum '(1.0 2 3)) ;; => 1.0
 ```
 
-### Special folds
+### Building lists
 
 ### Scans
 
