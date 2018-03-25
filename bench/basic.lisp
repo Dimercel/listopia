@@ -10,8 +10,8 @@
 
 (ok (bench ".head" (.head '(1 2 3))))
 (ok (bench ".last" (.last '(1 2 3))))
-(ok (bench ".tail" (.last '(1 2 3))))
-(ok (bench ".init" (.last '(1 2 3))))
-(ok (bench ".uncons" (.last '(1 2 3))))
+(ok (bench ".tail" (.tail '(1 2 3))))
+(ok (bench ".init" (.init '(1 2 3))))
+(ok (bench ".uncons" (.uncons '(1 2 3))))
 
 (finalize)
