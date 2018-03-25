@@ -16,6 +16,7 @@
                  (:test-file "basic")
                  (:test-file "transformations")
                  (:test-file "reducing-folds")
+                 (:test-file "special-folds")
                  )))
   :description "Benchmark system for listopia"
 
