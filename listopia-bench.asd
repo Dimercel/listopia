@@ -13,7 +13,9 @@
   :components ((:module "bench"
                 :components
                 ((:file "utils")
-                 (:test-file "basic"))))
+                 (:test-file "basic")
+                 (:test-file "transformations")
+                 )))
   :description "Benchmark system for listopia"
 
   :perform (test-op (op c) (symbol-call :prove-asdf :run-test-system c :reporter :dot)))
