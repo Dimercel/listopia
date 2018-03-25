@@ -18,6 +18,7 @@
                  (:test-file "reducing-folds")
                  (:test-file "special-folds")
                  (:test-file "scans")
+                 (:test-file "accumulating")
                  )))
   :description "Benchmark system for listopia"
 
