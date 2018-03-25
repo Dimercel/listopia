@@ -19,6 +19,7 @@
                  (:test-file "special-folds")
                  (:test-file "scans")
                  (:test-file "accumulating")
+                 (:test-file "infinite")
                  )))
   :description "Benchmark system for listopia"
 
