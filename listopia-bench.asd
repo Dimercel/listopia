@@ -20,6 +20,7 @@
                  (:test-file "scans")
                  (:test-file "accumulating")
                  (:test-file "infinite")
+                 (:test-file "unfoldr")
                  )))
   :description "Benchmark system for listopia"
 
