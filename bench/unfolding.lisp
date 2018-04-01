@@ -1,9 +1,9 @@
-(defpackage listopia-bench.unfoldr
+(defpackage listopia-bench.unfolding
   (:use :cl
         :prove
         :listopia
         :listopia-bench.utils))
-(in-package :listopia-bench.unfoldr)
+(in-package :listopia-bench.unfolding)
 
 
 (plan nil)
