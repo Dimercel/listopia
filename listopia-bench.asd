@@ -21,6 +21,7 @@
                  (:test-file "accumulating")
                  (:test-file "infinite")
                  (:test-file "unfolding")
+                 (:test-file "extracting-sublists")
                  )))
   :description "Benchmark system for listopia"
 
