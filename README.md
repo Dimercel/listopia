@@ -483,6 +483,18 @@ The .tails function returns all final segments of the argument, longest first.
 (.tails '()) ;; => '(nil)
 ```
 
+### Predicates
+
+#### .is-prefix-of `(prefix list)`
+
+The .is-prefix-of function takes two lists and returns `T` if the first list is a prefix of the second.
+
+```common-lisp
+(.is-prefix-of '(1 2) '(1 2 3 4)) ;; => T
+(.is-prefix-of '(1 2) '(4 3 2 1)) ;; => nil
+(.is-prefix-of '() '(1 2 3)) ;; => T
+```
+
 ## Author
 
 * Ito Dimercel (xolcman@gmail.com)

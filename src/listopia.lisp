@@ -62,6 +62,9 @@
            :.strip-prefix
            :.inits
            :.tails
+
+           ;; Predicates
+           :.is-prefix-of
    ))
 
 (in-package :listopia)
@@ -324,3 +327,10 @@
     (dotimes (n (length list))
       (setf result (cons (subseq list n) result)))
     (reverse (cons nil result))))
+
+
+;; Predicates
+
+
+(defun .is-prefix-of (prefix list)
+  (equal (.take (length prefix) list) prefix))

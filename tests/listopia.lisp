@@ -230,4 +230,13 @@
 (is '(nil) (.tails '()))
 (ok (null (.last (.tails '(1 2 3)))))
 
+
+;; Predicates
+
+
+(ok (.is-prefix-of '(1 2) '(1 2 3)))
+(ok (.is-prefix-of '() '(1 2 3)))
+(ok (not (.is-prefix-of '(1 2) '())))
+(ok (.is-prefix-of '() '()))
+
 (finalize)
