@@ -65,6 +65,7 @@
 
            ;; Predicates
            :.is-prefix-of
+           :.is-suffix-of
    ))
 
 (in-package :listopia)
@@ -334,3 +335,6 @@
 
 (defun .is-prefix-of (prefix list)
   (equal (.take (length prefix) list) prefix))
+
+(defun .is-suffix-of (suffix list)
+  (.is-prefix-of (reverse suffix) (reverse list)))

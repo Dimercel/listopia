@@ -239,4 +239,10 @@
 (ok (not (.is-prefix-of '(1 2) '())))
 (ok (.is-prefix-of '() '()))
 
+(ok (.is-suffix-of '(2 1) '(3 2 1)))
+(ok (.is-suffix-of '() '(1 2 3)))
+(ok (not (.is-suffix-of '(1 2) '())))
+(ok (.is-suffix-of '() '()))
+
+
 (finalize)

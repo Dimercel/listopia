@@ -495,6 +495,16 @@ The .is-prefix-of function takes two lists and returns `T` if the first list is 
 (.is-prefix-of '() '(1 2 3)) ;; => T
 ```
 
+#### .is-suffix-of `(suffix list)`
+
+The .is-suffix-of function takes two lists and returns `T` if the first list is a suffix of the second. 
+
+```common-lisp
+(.is-suffix-of '(2 1) '(4 3 2 1)) ;; => T
+(.is-suffix-of '(1 2) '(4 3 2 1)) ;; => nil
+(.is-suffix-of '() '(1 2 3)) ;; => T
+```
+
 ## Author
 
 * Ito Dimercel (xolcman@gmail.com)
