@@ -244,5 +244,9 @@
 (ok (not (.is-suffix-of '(1 2) '())))
 (ok (.is-suffix-of '() '()))
 
+(ok (.is-infix-of '(1 2) '(3 4 1 2 3 4)))
+(ok (.is-infix-of '() '(1 2 3)))
+(ok (not (.is-infix-of '(1 2) '())))
+(ok (.is-infix-of '() '()))
 
 (finalize)
