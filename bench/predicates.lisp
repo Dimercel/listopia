@@ -16,7 +16,7 @@
            (.is-suffix-of '(3 2 1) '(5 4 3 2 1))))
 
 (ok (bench ".is-infix-of"
-           (.is-suffix-of '(1 2) '(3 3 1 2 3 3))))
+           (.is-infix-of '(1 2) '(3 3 1 2 3 3))))
 
 
 (finalize)
