@@ -505,6 +505,16 @@ The .is-suffix-of function takes two lists and returns `T` if the first list is 
 (.is-suffix-of '() '(1 2 3)) ;; => T
 ```
 
+#### .is-infix-of `(infix list)`
+
+The .is-infix-of function takes two lists and returns `T` if the first list is contained, wholly and intact, anywhere within the second.
+
+```common-lisp
+(.is-infix-of '(1 2) '(3 3 1 2 3 3)) ;; => T
+(.is-infix-of '(1 2 3) '(4 1 2 4 3)) ;; => nil
+(.is-infix-of '() '(1 2 3)) ;; => T
+```
+
 ## Author
 
 * Ito Dimercel (xolcman@gmail.com)
