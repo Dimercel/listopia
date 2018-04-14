@@ -515,6 +515,17 @@ The .is-infix-of function takes two lists and returns `T` if the first list is c
 (.is-infix-of '() '(1 2 3)) ;; => T
 ```
 
+#### .is-subsequence-of `(subseq list)`
+
+The .is-subsequence-of function takes two lists and returns `T` if all the elements of the first list occur, in order, in the second. The elements do not have to occur consecutively.
+
+
+```common-lisp
+(.is-subsequence-of '(1 2 3) '(1 0 2 0 3 0)) ;; => T
+(.is-subsequence-of '(1 2 3) '(1 0 2 0 4 0)) ;; => nil
+(.is-subsequence-of '() '(1 2 3)) ;; => T
+```
+
 ## Author
 
 * Ito Dimercel (xolcman@gmail.com)
