@@ -18,5 +18,7 @@
 (ok (bench ".is-infix-of"
            (.is-infix-of '(1 2) '(3 3 1 2 3 3))))
 
+(ok (bench ".is-subsequence-of"
+           (.is-subsequence-of '(1 2 3) '(1 0 2 0 3 0))))
 
 (finalize)

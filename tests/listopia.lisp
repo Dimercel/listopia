@@ -249,4 +249,8 @@
 (ok (not (.is-infix-of '(1 2) '())))
 (ok (.is-infix-of '() '()))
 
+(ok (.is-subsequence-of '(1 2 3) '(1 0 2 0 3 0)))
+(ok (.is-subsequence-of '() '(1 2 3)))
+(ok (not (.is-subsequence-of '(1 2 3) '())))
+
 (finalize)

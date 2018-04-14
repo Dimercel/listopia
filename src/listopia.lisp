@@ -67,6 +67,7 @@
            :.is-prefix-of
            :.is-suffix-of
            :.is-infix-of
+           :.is-subsequence-of
    ))
 
 (in-package :listopia)
@@ -345,3 +346,11 @@
     ((> (length infix) (length list)) nil)
     ((.is-prefix-of infix list) t)
     (t (.is-infix-of infix (cdr list)))))
+
+(defun .is-subsequence-of (subseq list)
+  (cond
+    ((null subseq) t)
+    ((null list) nil)
+    (t (if (equal (car subseq) (car list))
+           (.is-subsequence-of (cdr subseq) (cdr list))
+           (.is-subsequence-of subseq (cdr list))))))
