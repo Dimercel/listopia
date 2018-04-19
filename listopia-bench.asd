@@ -23,6 +23,7 @@
                  (:test-file "unfolding")
                  (:test-file "extracting-sublists")
                  (:test-file "predicates")
+                 (:test-file "searching-lists")
                  )))
   :description "Benchmark system for listopia"
 

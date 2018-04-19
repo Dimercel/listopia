@@ -253,4 +253,16 @@
 (ok (.is-subsequence-of '() '(1 2 3)))
 (ok (not (.is-subsequence-of '(1 2 3) '())))
 
+
+;; Searching lists
+;; Searching by equality
+
+
+(ok (.elem 1 '(1 2 3)))
+(ok (not (.elem 1 '())))
+
+(ok (.not-elem :foo '(:bar 1 2)))
+(ok (not (.not-elem 1 '(1 2 3))))
+
+
 (finalize)

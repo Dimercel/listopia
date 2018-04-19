@@ -526,6 +526,30 @@ The .is-subsequence-of function takes two lists and returns `T` if all the eleme
 (.is-subsequence-of '() '(1 2 3)) ;; => T
 ```
 
+
+### Searching lists
+
+
+### Searching by equality
+
+#### .elem `(element list &key (test 'equalp))`
+
+Does the element occur in the structure?
+
+```common-lisp
+(.elem 1 '(1 2 3)) ;; => T
+(.elem "one" '(1 "one" 3) :test 'eql) ;; => nil
+```
+#### .not-elem `(element list &key (test 'equalp))`
+
+.not-elem is the negation of .elem.
+
+```common-lisp
+(.not-elem 7 '(1 2 3)) ;; => T
+(.not-elem "one" '(1 "one" 3) :test 'eql) ;; => T
+```
+
+
 ## Author
 
 * Ito Dimercel (xolcman@gmail.com)

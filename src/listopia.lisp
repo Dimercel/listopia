@@ -68,6 +68,11 @@
            :.is-suffix-of
            :.is-infix-of
            :.is-subsequence-of
+
+           ;; Searching lists
+           ;; Searching by equality
+           :.elem
+           :.not-elem
    ))
 
 (in-package :listopia)
@@ -354,3 +359,16 @@
     (t (if (equal (car subseq) (car list))
            (.is-subsequence-of (cdr subseq) (cdr list))
            (.is-subsequence-of subseq (cdr list))))))
+
+
+;; Searching lists
+
+
+;; Searching by equality
+
+
+(defun .elem (element list &key (test 'equalp))
+  (not (null (member element list :test test))))
+
+(defun .not-elem (element list &key (test 'equalp))
+  (not (.elem element list :test test)))
