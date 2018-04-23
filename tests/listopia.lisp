@@ -275,5 +275,9 @@
 (ok (null (.filter #'numberp '(:foo :bar))))
 (ok (null (.filter #'numberp '())))
 
+(is 2 (length (.partition #'numberp '(:foo 1 :bar 2 3))))
+(ok (null (first (.partition #'numberp '(:foo :bar)))))
+(ok (null (second (.partition #'keywordp '(:foo :bar)))))
+
 
 (finalize)

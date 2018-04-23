@@ -21,4 +21,7 @@
 (ok (bench ".filter"
            (.filter #'numberp '(:foo 1 :bar 2))))
 
+(ok (bench ".partition"
+           (.partition #'numberp '(:foo 1 :bar 2))))
+
 (finalize)

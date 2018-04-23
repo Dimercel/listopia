@@ -77,6 +77,7 @@
            ;; Searching with a predicate
            :.find
            :.filter
+           :.partition
    ))
 
 (in-package :listopia)
@@ -389,3 +390,7 @@
 
 (defun .filter (pred list)
   (remove-if-not pred list))
+
+(defun .partition (pred list)
+  (list (remove-if-not pred list)
+        (remove-if pred list)))

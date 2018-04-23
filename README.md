@@ -571,6 +571,15 @@ The .find function takes a predicate and a list and returns the leftmost element
 (.filter #'numberp '(:foo :bar)) ;; => nil
 ```
 
+#### .partition `(pred list)`
+
+The .partition function takes a predicate a list and returns the pair of lists of elements which do and do not satisfy the predicate, respectively; i.e.,
+
+```common-lisp
+(.partition #'numberp '(:foo 1 :bar 2)) ;; => '((1 2) (:foo :bar))
+(.partition #'numberp '(:foo :bar)) ;; => '(() (:foo :bar))
+```
+
 
 ## Author
 
