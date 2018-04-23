@@ -76,6 +76,7 @@
 
            ;; Searching with a predicate
            :.find
+           :.filter
    ))
 
 (in-package :listopia)
@@ -380,8 +381,11 @@
 ;; Searching with a predicate
 
 
-(defun .find (fn list &optional (default nil))
-  (let ((tail (member-if fn list)))
+(defun .find (pred list &optional (default nil))
+  (let ((tail (member-if pred list)))
     (if (null tail)
         default
         (car tail))))
+
+(defun .filter (pred list)
+  (remove-if-not pred list))

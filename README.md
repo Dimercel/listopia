@@ -552,7 +552,7 @@ Does the element occur in the structure?
 
 ### Searching with a predicate
 
-#### .find `(fn list &optional (default nil))`
+#### .find `(pred list &optional (default nil))`
 
 The .find function takes a predicate and a list and returns the leftmost element of the list matching the predicate, or `default` argument if there is no such element.
 
@@ -560,6 +560,15 @@ The .find function takes a predicate and a list and returns the leftmost element
 (.find #'numberp '(:foo :bar 1 2 3)) ;; => 1
 (.find #'numberp '(:foo :bar)) ;; => nil
 (.find #'numberp '(:foo :bar) 666) ;; => 666
+```
+
+#### .filter `(pred list)`
+
+.filter, applied to a predicate and a list, returns the list of those elements that satisfy the predicate; i.e.,
+
+```common-lisp
+(.filter #'numberp '(:foo 1 :bar 2 3)) ;; => '(1 2 3)
+(.filter #'numberp '(:foo :bar)) ;; => nil
 ```
 
 

@@ -18,4 +18,7 @@
 (ok (bench ".find"
            (.find #'numberp '(:foo :bar 1))))
 
+(ok (bench ".filter"
+           (.filter #'numberp '(:foo 1 :bar 2))))
+
 (finalize)

@@ -271,4 +271,9 @@
 (is 666 (.find #'numberp '(:foo :bar) 666))
 (is nil (.find #'numberp '(:foo bar)))
 
+(is 3 (length (.filter #'numberp '(:foo 1 :bar 2 3))))
+(ok (null (.filter #'numberp '(:foo :bar))))
+(ok (null (.filter #'numberp '())))
+
+
 (finalize)
