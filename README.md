@@ -540,6 +540,7 @@ Does the element occur in the structure?
 (.elem 1 '(1 2 3)) ;; => T
 (.elem "one" '(1 "one" 3) :test 'eql) ;; => nil
 ```
+
 #### .not-elem `(element list &key (test 'equalp))`
 
 .not-elem is the negation of .elem.
@@ -547,6 +548,18 @@ Does the element occur in the structure?
 ```common-lisp
 (.not-elem 7 '(1 2 3)) ;; => T
 (.not-elem "one" '(1 "one" 3) :test 'eql) ;; => T
+```
+
+### Searching with a predicate
+
+#### .find `(fn list &optional (default nil))`
+
+The .find function takes a predicate and a list and returns the leftmost element of the list matching the predicate, or `default` argument if there is no such element.
+
+```common-lisp
+(.find #'numberp '(:foo :bar 1 2 3)) ;; => 1
+(.find #'numberp '(:foo :bar)) ;; => nil
+(.find #'numberp '(:foo :bar) 666) ;; => 666
 ```
 
 

@@ -73,6 +73,9 @@
            ;; Searching by equality
            :.elem
            :.not-elem
+
+           ;; Searching with a predicate
+           :.find
    ))
 
 (in-package :listopia)
@@ -372,3 +375,13 @@
 
 (defun .not-elem (element list &key (test 'equalp))
   (not (.elem element list :test test)))
+
+
+;; Searching with a predicate
+
+
+(defun .find (fn list &optional (default nil))
+  (let ((tail (member-if fn list)))
+    (if (null tail)
+        default
+        (car tail))))

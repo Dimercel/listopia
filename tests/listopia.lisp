@@ -265,4 +265,10 @@
 (ok (not (.not-elem 1 '(1 2 3))))
 
 
+;; Searching with a predicate
+
+
+(is 666 (.find #'numberp '(:foo :bar) 666))
+(is nil (.find #'numberp '(:foo bar)))
+
 (finalize)

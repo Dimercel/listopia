@@ -15,5 +15,7 @@
 (ok (bench ".not-elem"
            (.not-elem 1 '(2 3 4))))
 
+(ok (bench ".find"
+           (.find #'numberp '(:foo :bar 1))))
 
 (finalize)
