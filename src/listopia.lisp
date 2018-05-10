@@ -78,6 +78,9 @@
            :.find
            :.filter
            :.partition
+
+           ;; Indexing lists
+           :.elem-index
    ))
 
 (in-package :listopia)
@@ -394,3 +397,11 @@
 (defun .partition (pred list)
   (list (remove-if-not pred list)
         (remove-if pred list)))
+
+
+;; Indexing lists
+
+
+(defun .elem-index (item list &optional (default nil))
+  (let ((inx (position item list)))
+    (if (null inx) default inx)))

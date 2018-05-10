@@ -24,6 +24,7 @@
                  (:test-file "extracting-sublists")
                  (:test-file "predicates")
                  (:test-file "searching-lists")
+                 (:test-file "indexing-lists")
                  )))
   :description "Benchmark system for listopia"
 

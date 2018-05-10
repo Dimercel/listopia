@@ -280,4 +280,11 @@
 (ok (null (second (.partition #'keywordp '(:foo :bar)))))
 
 
+;; Indexing lists
+
+
+(is nil (.elem-index 0 '(1 2 3)))
+(is 42 (.elem-index 0 '(1 2 3) 42))
+
+
 (finalize)

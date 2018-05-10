@@ -580,6 +580,17 @@ The .partition function takes a predicate a list and returns the pair of lists o
 (.partition #'numberp '(:foo :bar)) ;; => '(() (:foo :bar))
 ```
 
+### Indexing lists
+
+#### .elem-index `(item list &optional (default nil))`
+
+The .elem-index function returns the index of the first element in the given list which is equal to the query element, or DEFAULT if there is no such element.
+
+```common-lisp
+(.elem-index 2 '(1 2 3)) ;; => 1
+(.elem-index 2 '(1 2 3 2 1)) ;; => 1
+(.elem-index 0 '(1 2 3) 42) ;; => 42
+```
 
 ## Author
 
