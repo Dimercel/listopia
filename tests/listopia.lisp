@@ -286,5 +286,8 @@
 (is nil (.elem-index 0 '(1 2 3)))
 (is 42 (.elem-index 0 '(1 2 3) 42))
 
+(is nil (.find-index #'keywordp '(1 2 3)))
+(is 42 (.find-index #'keywordp '(1 2 3) 42))
+
 
 (finalize)

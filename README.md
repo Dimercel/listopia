@@ -592,6 +592,16 @@ The .elem-index function returns the index of the first element in the given lis
 (.elem-index 0 '(1 2 3) 42) ;; => 42
 ```
 
+#### .find-index `(pred list &optional (default nil))`
+
+The .find-index function takes a predicate and a list and returns the index of the first element in the list satisfying the predicate, or DEFAULT if there is no such element.
+
+```common-lisp
+(.find-index #'keywordp '(1 :foo 3)) ;; => 1
+(.find-index #'keywordp '(1 :foo 3 :bar 1)) ;; => 1
+(.find-index #'keywordp '(1 2 3) 42) ;; => 42
+```
+
 ## Author
 
 * Ito Dimercel (xolcman@gmail.com)
