@@ -81,7 +81,9 @@
 
            ;; Indexing lists
            :.elem-index
+           :.elem-indices
            :.find-index
+           :.find-indices
    ))
 
 (in-package :listopia)
@@ -409,3 +411,14 @@
 
 (defun .elem-index (item list &optional (default nil))
   (.find-index (lambda (x) (equalp x item)) list default))
+
+(defun .find-indices (pred list)
+  (labels ((func (pred list start result)
+             (let ((inx (position-if pred list :start start)))
+               (if inx
+                   (func pred list (1+ inx) (cons inx result))
+                   result))))
+    (func pred list 0 '())))
+
+(defun .elem-indices (item list)
+  (.find-indices (lambda (x) (equalp x item)) list))
