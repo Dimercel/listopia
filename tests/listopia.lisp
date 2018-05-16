@@ -295,4 +295,13 @@
 (is 0 (length (.elem-indices 42 '(1 2 3))))
 (ok (not (= 0 (length (.elem-indices 42 '(1 42 3 42))))))
 
+
+;; Zipping and unzipping lists
+
+
+(is 2 (length (.zip '(1 2) '(3 4) '(5 6))))
+(is '() (.zip '(1 2) '() '(3 4)))
+(is '() (.zip '() '()))
+
+
 (finalize)

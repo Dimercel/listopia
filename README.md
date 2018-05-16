@@ -620,6 +620,18 @@ The .find-indices function extends .find-index, by returning the indices of all 
 (.find-indices #'keywordp '(1 2 3)) ;; => '()
 ```
 
+### Zipping and unzipping lists
+
+#### .zip `(&rest lists)`
+
+Zip LISTS together. Group the head of each list, followed by the second elements of each list, and so on. The lengths of the returned groupings are equal to the length of the shortest input list.
+
+
+```common-lisp
+(.zip '(1 2) '(3 4) '(5 6))) ;; => '((1 3 5) (2 4 6))
+(.zip '(1 2 3) '(4) '(5 6))) ;; => '((1 4 5))
+(.zip '(1 2 3) '() '(5 6))) ;; => '()
+```
 
 ## Author
 

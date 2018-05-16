@@ -84,6 +84,9 @@
            :.elem-indices
            :.find-index
            :.find-indices
+
+           ;; Zipping and unzipping lists
+           .zip
    ))
 
 (in-package :listopia)
@@ -422,3 +425,16 @@
 
 (defun .elem-indices (item list)
   (.find-indices (lambda (x) (equalp x item)) list))
+
+
+;; Zipping and unzipping lists
+
+
+(defun .zip (&rest lists)
+  (labels ((func (result lists)
+             (if (some #'null lists)
+                 result
+                 (func
+                  (append result (list (mapcar #'car lists)))
+                  (mapcar #'cdr lists)))))
+    (func '() lists)))

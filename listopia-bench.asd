@@ -25,6 +25,7 @@
                  (:test-file "predicates")
                  (:test-file "searching-lists")
                  (:test-file "indexing-lists")
+                 (:test-file "zipping")
                  )))
   :description "Benchmark system for listopia"
 
