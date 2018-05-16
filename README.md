@@ -633,6 +633,16 @@ Zip LISTS together. Group the head of each list, followed by the second elements
 (.zip '(1 2 3) '() '(5 6))) ;; => '()
 ```
 
+#### .zip-with `(fn &rest lists)`
+
+.zip-with generalises zip by zipping with the function given as the first argument.
+
+```common-lisp
+(.zip-with #'+ '(1 2) '(3 4) '(5 6))) ;; => '(9 12)
+(.zip-with #'list '(1 2) '(3 4) '(5 6))) ;; => '((1 3 5) (2 4 6))
+(.zip-with #'+ '(1 2 3) '() '(5 6))) ;; => '()
+```
+
 ## Author
 
 * Ito Dimercel (xolcman@gmail.com)

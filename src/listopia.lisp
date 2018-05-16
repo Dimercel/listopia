@@ -87,6 +87,7 @@
 
            ;; Zipping and unzipping lists
            .zip
+           .zip-with
    ))
 
 (in-package :listopia)
@@ -430,11 +431,15 @@
 ;; Zipping and unzipping lists
 
 
-(defun .zip (&rest lists)
-  (labels ((func (result lists)
+(defun .zip-with (fn &rest lists)
+  (labels ((func (result fn lists)
              (if (some #'null lists)
-                 result
+                 (nreverse result)
                  (func
-                  (append result (list (mapcar #'car lists)))
+                  (push (apply fn (mapcar #'car lists)) result)
+                  fn
                   (mapcar #'cdr lists)))))
-    (func '() lists)))
+    (func '() fn lists)))
+
+(defun .zip (&rest lists)
+  (apply #'.zip-with (cons #'list lists)))
