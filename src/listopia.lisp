@@ -88,6 +88,7 @@
            ;; Zipping and unzipping lists
            .zip
            .zip-with
+           .unzip
    ))
 
 (in-package :listopia)
@@ -443,3 +444,6 @@
 
 (defun .zip (&rest lists)
   (apply #'.zip-with (cons #'list lists)))
+
+(defun .unzip (lists)
+  (apply '.zip lists))

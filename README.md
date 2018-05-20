@@ -643,6 +643,19 @@ Zip LISTS together. Group the head of each list, followed by the second elements
 (.zip-with #'+ '(1 2 3) '() '(5 6))) ;; => '()
 ```
 
+#### .unzip `(lists)`
+
+Opposite by sense to .zip.
+
+
+```common-lisp
+(.unzip '((1 2) (3 4) (5 6))) ;; => '((1 3 5) (2 4 6))
+(.unzip (.zip '(1 2) '(3 4) '(5 6))) ;; => '((1 2) (3 4) (5 6))
+(.unzip '((1 2 3) '(4) '(5 6))) ;; => '((1 4 5))
+(.unzip '((1 2 3) '())) ;; => '()
+```
+
+
 ## Author
 
 * Ito Dimercel (xolcman@gmail.com)
