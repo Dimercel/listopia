@@ -446,4 +446,4 @@
   (apply #'.zip-with (cons #'list lists)))
 
 (defun .unzip (lists)
-  (apply '.zip lists))
+  (apply #'.zip lists))
