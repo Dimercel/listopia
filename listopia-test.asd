@@ -1,6 +1,6 @@
 #|
   This file is a part of listopia project.
-  Copyright (c) 2018 Ito Dimercel (xolcman@gmail.com)
+  Copyright (c) 2019 Ito Dimercel (xolcman@gmail.com)
 |#
 
 (defsystem "listopia-test"
