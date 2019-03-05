@@ -339,15 +339,13 @@ Returned list has a size equal to parameter SIZE.
 (.replicate 0 :foo) ;; => nil
 ```
 
-#### .cycle `(list size)`
+#### .cycle `(list)`
 
-.cycle ties a finite list into a circular one, or equivalently.
-
-Returned list has a size equal to parameter SIZE.
+.cycle ties a finite list into a circular one, or equivalently, the infinite repetition of the original list. It is the identity on infinite lists.
 
 ```common-lisp
-(.cycle '(1 2 3) 5) ;; => '(1 2 3 1 2)
-(.cycle '(1 2 3) 0) ;; => nil
+(.take 5 (.cycle '(1 2 3))) ;; => '(1 2 3 1 2)
+(.take 0 (.cycle '(1 2 3))) ;; => nil
 ```
 
 ### Unfolding

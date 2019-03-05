@@ -286,13 +286,11 @@
 (defun .replicate (size init-val)
   (.repeat init-val size))
 
-(defun .cycle (list size)
+(defun .cycle (list)
   (when (null list)
     (error "empty list"))
-  (if (< size (length list))
-      (subseq list 0 size)
-      (append list
-              (.cycle list (- size (length list))))))
+  (lazy-list (copy-list list)
+             (lambda () (.cycle list))))
 
 
 ;; Unfolding

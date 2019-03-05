@@ -164,9 +164,8 @@
 (is '() (.replicate 0 1))
 (is 4 (length (.replicate 4 1)))
 
-(is-error (.cycle '() 1) 'error)
-(is '() (.cycle '(1 2 3) 0))
-(is 5 (length (.cycle '(1 2 3) 5)))
+(is-error (.cycle '()) 'error)
+(is 5 (length (.take 5 (.cycle '(1 2 3)))))
 
 
 ;; Unfolding
