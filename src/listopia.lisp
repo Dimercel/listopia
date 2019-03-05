@@ -94,7 +94,7 @@
 (in-package :listopia)
 
 
-;;; Laziness core
+;;; Laziness
 
 
 (declaim (inline lazy-list))
@@ -312,9 +312,17 @@
 
 (defun .take (count list)
   (when (< count 0) (return-from .take nil))
+  (when (lazy-list-p list) (return-from .take (.take-lazy count list)))
   (if (<= count (length list))
       (subseq list 0 count)
       list))
+
+(defun .take-lazy (count list)
+  (let ((head (aref list 0))
+        (tail-fn (aref list 1)))
+    (if (>= (length head) count)
+        (subseq head 0 count)
+        (nconc head (.take-lazy (- count (length head)) (funcall tail-fn))))))
 
 (defun .drop (count list)
   (when (< count 0) (return-from .drop list))
