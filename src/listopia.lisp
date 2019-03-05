@@ -94,6 +94,21 @@
 (in-package :listopia)
 
 
+;;; Laziness core
+
+
+(declaim (inline lazy-list))
+
+(defun lazy-list (list fn)
+  (vector list fn))
+
+(defun lazy-list-p (list)
+  (if (and (typep list 'vector)
+           (= (length list) 2))
+      t
+      nil))
+
+
 ;;; Basic functions
 
 
