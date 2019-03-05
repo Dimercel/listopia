@@ -156,8 +156,7 @@
 ;; Infinite lists
 
 
-(is '() (.iterate #'1+ 1 0))
-(is 4 (length (.iterate #'1+ 1 4)))
+(is 4 (length (.take 4 (.iterate #'1+ 1))))
 
 (is '() (.repeat 1 0))
 (is 4 (length (.repeat 1 4)))
@@ -173,7 +172,7 @@
 ;; Unfolding
 
 
-(is (.iterate #'1+ 0 4) (.unfoldr (lambda (x)
+(is (.take 4 (.iterate #'1+ 0)) (.unfoldr (lambda (x)
                                     (if (< x 4)
                                         (list x (1+ x))))
                                   0))

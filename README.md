@@ -306,17 +306,15 @@ The least element of a non-empty list.
 
 ### Infinite lists
 
-#### .iterate `(fn init-val size)`
+#### .iterate `(fn init-val)`
 
-`(.iterate fn val n)` returns an list of repeated applications of fn to val:
+`(.iterate fn val)` returns an list of repeated applications of fn to val:
 
-`(.iterate f x size) ==  (list x (f x) (f (f x)) ...)`
-
-Returned list has a size equal to parameter SIZE.
+`(.iterate f x) ==  (list x (f x) (f (f x)) ...)`
 
 ```common-lisp
-(.iterate #'1+ 0 4) ;; => '(0 1 2 3)'
-(.iterate #'1+ 0 0) ;; => nil
+(.take 4 (.iterate #'1+ 0)) ;; => '(0 1 2 3)'
+(.take 0 (.iterate #'1+ 0)) ;; => nil
 ```
 
 #### .repeat `(init-val size)`
