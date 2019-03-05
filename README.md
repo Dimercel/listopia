@@ -324,9 +324,9 @@ The least element of a non-empty list.
 Returned list has a size equal to parameter SIZE.
 
 ```common-lisp
-(.repeat 1 4) ;; => '(1 1 1 1)
-(.repeat :foo 2) ;; => '(:foo :foo)
-(.repeat :foo 0) ;; => nil
+(.take 4 (.repeat 1)) ;; => '(1 1 1 1)
+(.take 2 (.repeat :foo)) ;; => '(:foo :foo)
+(.take 0 (.repeat :foo)) ;; => nil
 ```
 
 #### .replicate `(size init-val)`

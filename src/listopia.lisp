@@ -280,8 +280,9 @@
   (lazy-list (list init-val)
              (lambda () (.iterate fn (funcall fn init-val)))))
 
-(defun .repeat (init-val size)
-  (make-list size :initial-element init-val))
+(defun .repeat (init-val)
+  (lazy-list (list init-val)
+             (lambda () (.repeat init-val))))
 
 (defun .replicate (size init-val)
   (.repeat init-val size))

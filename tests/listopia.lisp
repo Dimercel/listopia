@@ -158,8 +158,7 @@
 
 (is 4 (length (.take 4 (.iterate #'1+ 1))))
 
-(is '() (.repeat 1 0))
-(is 4 (length (.repeat 1 4)))
+(is 4 (length (.take 4 (.repeat 1))))
 
 (is '() (.replicate 0 1))
 (is 4 (length (.replicate 4 1)))
