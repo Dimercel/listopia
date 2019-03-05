@@ -285,7 +285,7 @@
              (lambda () (.repeat init-val))))
 
 (defun .replicate (size init-val)
-  (.repeat init-val size))
+  (make-list size :initial-element init-val))
 
 (defun .cycle (list)
   (when (null list)

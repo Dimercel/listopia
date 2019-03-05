@@ -376,6 +376,14 @@ The .unfoldr function is a dual to .foldr: while .foldr reduces a list to a summ
 (.take 0 '(1 2)) ;; => nil
 ```
 
+This function maybe use with infinite lists. 
+
+```common-lisp
+(.take 4 (.cycle '(1 2 3))) ;; => '(1 2 3 1)
+(.take 4 (.iterate #'1+ 0)) ;; => '(0 1 2 3)
+(.take 4 (.repeat 1)) ;; => '(1 1 1 1)
+```
+
 #### .drop `(count list)`
 
 `(.drop n xs)` returns the suffix of xs after the first n elements, or NIL if n > length xs.

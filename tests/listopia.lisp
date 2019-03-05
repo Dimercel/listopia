@@ -187,6 +187,8 @@
 (is '() (.take 0 '(1 2 3)))
 (is '() (.take -1 '(1 2 3)))
 (is 4 (length (.take 10 '(1 2 3 4))))
+(is 4 (length (.take 4 (.cycle '(1 2)))))
+(is 4 (length (.take 4 (.iterate #'identity nil))))
 
 (is '() (.drop 3 '(1 2)))
 (is '() (.drop 3 '()))
