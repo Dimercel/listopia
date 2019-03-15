@@ -310,8 +310,8 @@
 
 
 (defun .take (count list)
-  (when (< count 0) (return-from .take nil))
-  (when (lazy-list-p list) (return-from .take (.take-lazy count list)))
+  (cond ((< count 0) (return-from .take nil))
+        ((lazy-list-p list) (return-from .take (.take-lazy count list))))
   (if (<= count (length list))
       (subseq list 0 count)
       list))
