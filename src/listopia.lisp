@@ -97,16 +97,9 @@
 ;;; Laziness
 
 
-(declaim (inline lazy-list))
-
-(defun lazy-list (list fn)
-  (vector list fn))
-
-(defun lazy-list-p (list)
-  (if (and (typep list 'vector)
-           (= (length list) 2))
-      t
-      nil))
+(defstruct lazy-list
+  (part nil)
+  (fn nil))
 
 
 ;;; Basic functions
@@ -277,12 +270,12 @@
 
 
 (defun .iterate (fn init-val)
-  (lazy-list (list init-val)
-             (lambda () (.iterate fn (funcall fn init-val)))))
+  (make-lazy-list :part (list init-val)
+                  :fn (lambda () (.iterate fn (funcall fn init-val)))))
 
 (defun .repeat (init-val)
-  (lazy-list (list init-val)
-             (lambda () (.repeat init-val))))
+  (make-lazy-list :part (list init-val)
+                  :fn (lambda () (.repeat init-val))))
 
 (defun .replicate (size init-val)
   (make-list size :initial-element init-val))
@@ -290,8 +283,8 @@
 (defun .cycle (list)
   (when (null list)
     (error "empty list"))
-  (lazy-list (copy-list list)
-             (lambda () (.cycle list))))
+  (make-lazy-list :part (copy-list list)
+                  :fn (lambda () (.cycle list))))
 
 
 ;; Unfolding
@@ -317,11 +310,11 @@
       list))
 
 (defun .take-lazy (count list)
-  (let ((head (aref list 0))
-        (tail-fn (aref list 1)))
-    (if (>= (length head) count)
-        (subseq head 0 count)
-        (nconc head (.take-lazy (- count (length head)) (funcall tail-fn))))))
+  (let ((part (lazy-list-part list))
+        (fn (lazy-list-fn list)))
+    (if (>= (length part) count)
+        (subseq part 0 count)
+        (nconc part (.take-lazy (- count (length part)) (funcall fn))))))
 
 (defun .drop (count list)
   (when (< count 0) (return-from .drop list))
