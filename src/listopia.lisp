@@ -325,10 +325,9 @@
         (.drop count list)))
 
 (defun .take-while (pred list)
-  (unless (null list)
-      (when (funcall pred (first list))
-        (cons (first list)
-              (.take-while pred (cdr list))))))
+  (loop for item in list
+        while (funcall pred item)
+        collect item))
 
 (defun .drop-while (pred list)
   (unless (null list)
