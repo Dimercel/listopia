@@ -440,7 +440,8 @@
     (func pred list 0 '())))
 
 (defun .elem-indices (item list)
-  (.find-indices (lambda (x) (equalp x item)) list))
+ (loop for i from 0 and e in list
+        when (equal e item) collect i))
 
 
 ;; Zipping and unzipping lists
