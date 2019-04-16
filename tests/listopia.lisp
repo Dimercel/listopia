@@ -290,6 +290,7 @@
 
 (is 0 (length (.find-indices #'keywordp '(1 2 3))))
 (ok (not (= 0 (length (.find-indices #'keywordp '(1 :foo 3 :bar))))))
+(is '(0 2) (.find-indices #'null '(nil 1 nil 2 3)))
 
 (is 0 (length (.elem-indices 42 '(1 2 3))))
 (ok (not (= 0 (length (.elem-indices 42 '(1 42 3 42))))))

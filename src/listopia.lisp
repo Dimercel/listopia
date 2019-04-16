@@ -432,12 +432,8 @@
   (.find-index (lambda (x) (equalp x item)) list default))
 
 (defun .find-indices (pred list)
-  (labels ((func (pred list start result)
-             (let ((inx (position-if pred list :start start)))
-               (if inx
-                   (func pred list (1+ inx) (cons inx result))
-                   result))))
-    (func pred list 0 '())))
+  (loop for i from 0 and e in list
+        when (funcall pred e) collect i))
 
 (defun .elem-indices (item list)
  (loop for i from 0 and e in list
