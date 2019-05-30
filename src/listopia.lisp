@@ -116,9 +116,9 @@
       (car (last list))))
 
 (defun .tail (list &optional (default nil))
-  (if (> (length list) 1)
-      (cdr list)
-      default))
+  (if (null list)
+      default
+      (rest list)))
 
 (defun .init (list &optional (default nil))
   (if (rest list)
@@ -126,9 +126,9 @@
       default))
 
 (defun .uncons (list &optional (default nil))
-  (if (> (length list) 1)
-      (list (car list)
-            (cdr list))
+  (if (rest list)
+      (list (first list)
+            (rest list))
       default))
 
 
@@ -159,7 +159,7 @@
           :initial-value init-val))
 
 (defun .foldl1 (fn list)
-  (if (> (length list) 1)
+  (if (rest list)
       (.foldl fn (car list) (cdr list))
       (error "empty list")))
 
@@ -170,7 +170,7 @@
           :initial-value init-val))
 
 (defun .foldr1 (fn list)
-  (if (> (length list) 1)
+  (if (rest list)
       (.foldr fn (.last list) (.init list))
       (error "empty list")))
 
