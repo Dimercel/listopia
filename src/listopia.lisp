@@ -121,7 +121,7 @@
       default))
 
 (defun .init (list &optional (default nil))
-  (if (cdr list)
+  (if (rest list)
       (butlast list)
       default))
 
