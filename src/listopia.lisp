@@ -139,12 +139,7 @@
   (map 'list fn list))
 
 (defun .intersperse (sep list)
-  (labels ((internal-fn (sep list)
-             (if (null list)
-                 nil
-                 (append (list (car list) sep)
-                         (internal-fn sep (cdr list))))))
-    (.init (internal-fn sep list) nil)))
+  (.init (.concat-map (lambda (x) (list x sep)) list)))
 
 (defun .intercalate (sep list)
   (.concat (.intersperse sep list)))
@@ -179,8 +174,7 @@
 
 
 (defun .concat (list)
-  (apply #'concatenate
-         (cons 'list list)))
+  (.foldl #'append nil list))
 
 (defun .concat-map (fn list)
   (.concat (.map fn list)))
