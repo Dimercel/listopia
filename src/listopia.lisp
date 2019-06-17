@@ -219,10 +219,12 @@
 (defun .scanl (fn init-val list)
   (if (null list)
       (list init-val)
-      (cons init-val
-            (.scanl fn
-                    (funcall fn init-val (car list))
-                    (cdr list)))))
+      (let ((acc init-val)
+            (res nil))
+        (dolist (item list)
+          (setf acc (funcall fn acc item))
+          (push acc res))
+          (cons init-val (nreverse res)))))
 
 (defun .scanl1 (fn list)
   (unless (null list)
