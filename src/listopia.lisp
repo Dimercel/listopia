@@ -440,14 +440,14 @@
 
 
 (defun .zip-with (fn &rest lists)
-  (labels ((func (result fn lists)
+  (labels ((go-fn (result fn lists)
              (if (some #'null lists)
                  (nreverse result)
-                 (func
+                 (go-fn
                   (push (apply fn (mapcar #'car lists)) result)
                   fn
                   (mapcar #'cdr lists)))))
-    (func '() fn lists)))
+    (go-fn '() fn lists)))
 
 (defun .zip (&rest lists)
   (apply #'.zip-with (cons #'list lists)))
