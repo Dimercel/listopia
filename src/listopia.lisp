@@ -86,9 +86,9 @@
            :.find-indices
 
            ;; Zipping and unzipping lists
-           .zip
-           .zip-with
-           .unzip
+           :.zip
+           :.zip-with
+           :.unzip
    ))
 
 (in-package :listopia)
