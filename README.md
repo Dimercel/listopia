@@ -317,11 +317,9 @@ The least element of a non-empty list.
 (.take 0 (.iterate #'1+ 0)) ;; => nil
 ```
 
-#### .repeat `(init-val size)`
+#### .repeat `(init-val)`
 
-`(.repeat x n)` is an list, with x the value of every element.
-
-Returned list has a size equal to parameter SIZE.
+`(.repeat x)` is an list, with x the value of every element.
 
 ```common-lisp
 (.take 4 (.repeat 1)) ;; => '(1 1 1 1)
