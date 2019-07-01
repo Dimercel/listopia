@@ -5,7 +5,21 @@
 ## Usage
 
 ```common-lisp
-(:use :listopia)
+(:import-from :listopia
+              :name)
+```
+
+or
+
+```common-lisp
+(:use :cl :listopia)
+(:shadowing-import-from :listopia
+                        :and
+                        :break
+                        :find
+                        :last
+                        :map
+                        :or)
 ```
 
 ## Installation
@@ -15,346 +29,343 @@
 ```
 
 
-## Functions
-
-All functions and constructs in the library are prefixed with a point (.)
-
 ### Basic functions
 
-#### .head `(list &optional (default nil))`
+#### head `(list &optional (default nil))`
 
 Extract the first element of a list. If list is empty, returns default value.
 
 ```common-lisp
-(.head '(1 2 3)) ;; => 1
-(.head '(1)) ;; => 1
-(.head '() 666) ;; => 666
+(head '(1 2 3)) ;; => 1
+(head '(1)) ;; => 1
+(head '() 666) ;; => 666
 ```
 
-#### .last `(list &optional (default nil))`
+#### last `(list &optional (default nil))`
 
 Extract the last element of a list. If list is empty, returns default value.
 
 ```common-lisp
-(.last '(1 2 3)) ;; => 3
-(.last '(1)) ;; => 1
-(.last '() 666) ;; => 666
+(last '(1 2 3)) ;; => 3
+(last '(1)) ;; => 1
+(last '() 666) ;; => 666
 ```
 
-#### .tail `(list &optional (default nil))`
+#### tail `(list &optional (default nil))`
 
 Extract the elements after the head of a list. If list is empty, returns default value.
 
 ```common-lisp
-(.tail '(1 2 3)) ;; => '(2 3)
-(.tail '(1)) ;; => '()
-(.tail '() 666) ;; => 666
+(tail '(1 2 3)) ;; => '(2 3)
+(tail '(1)) ;; => '()
+(tail '() 666) ;; => 666
 ```
 
-#### .init `(list &optional (default nil))`
+#### init `(list &optional (default nil))`
 
 Return all the elements of a list except the last one. If list is empty, returns default value.
 
 ```common-lisp
-(.init '(1 2 3)) ;; => '(1 2)
-(.init '(1)) ;; => '()
-(.init '() 666) ;; => 666
+(init '(1 2 3)) ;; => '(1 2)
+(init '(1)) ;; => '()
+(init '() 666) ;; => 666
 ```
 
-#### .uncons `(list &optional (default nil))`
+#### uncons `(list &optional (default nil))`
 
 Decompose a list into its head and tail. If the list is empty, returns default. If the list is non-empty, returns '(x, xs), where x is the head of the list and xs its tail.
 
 ```common-lisp
-(.uncons '(1 2 3)) ;; => '(1 (2 3))
-(.uncons '(1)) ;; => '(1 ())
-(.uncons '() 666) ;; => 666
+(uncons '(1 2 3)) ;; => '(1 (2 3))
+(uncons '(1)) ;; => '(1 ())
+(uncons '() 666) ;; => 666
 ```
 
 ### List transformations
 
-#### .map `(fn list)`
+#### map `(fn list)`
 
 Result - is the list obtained by applying `FN` to each element of `LIST`.
 
 ```common-lisp
-(.map #'1+ '(1 2 3)) ;; => '(2 3 4)
-(.map #'1+ '()) ;; => nil
+(map #'1+ '(1 2 3)) ;; => '(2 3 4)
+(map #'1+ '()) ;; => nil
 ```
 
-#### .intersperse `(sep lisp)`
+#### intersperse `(sep lisp)`
 
-The `.intersperse` function takes an element and a list and 'intersperses' that element between the elements of the list.
+The `intersperse` function takes an element and a list and 'intersperses' that element between the elements of the list.
 
 ```common-lisp
-(.intersperse 0 '(1 2 3)) ;; => '(1 0 2 0 3)
-(.intersperse "," '("1" "2" "3")) ;; => '("1" "," "2" "," "3")
-(.intersperse 0 '()) ;; => nil
+(intersperse 0 '(1 2 3)) ;; => '(1 0 2 0 3)
+(intersperse "," '("1" "2" "3")) ;; => '("1" "," "2" "," "3")
+(intersperse 0 '()) ;; => nil
 ```
 
-#### .intercalate `(sep list)`
+#### intercalate `(sep list)`
 
-`(.intercalate sep list)` is equivalent to `(.concat (.intersperse sep list))`. It inserts the list `SEP` in between the lists in `LIST` and concatenates the result.
+`(intercalate sep list)` is equivalent to `(concat (intersperse sep list))`. It inserts the list `SEP` in between the lists in `LIST` and concatenates the result.
 
 ```common-lisp
-(.intercalate '(0) '((1) (2) (3))) ;; => '(1 0 2 0 3)
-(.intercalate '(0) '((1) (2 3) (4 5 6))) ;; => '(1 0 2 3 0 4 5 6)
-(.intercalate '(0) '()') ;; => nil
+(intercalate '(0) '((1) (2) (3))) ;; => '(1 0 2 0 3)
+(intercalate '(0) '((1) (2 3) (4 5 6))) ;; => '(1 0 2 3 0 4 5 6)
+(intercalate '(0) '()') ;; => nil
 ```
 
 ### Reducing lists (folds)
 
-#### .foldl `(fn init-val list)`
+#### foldl `(fn init-val list)`
 
 Left-associative fold of a list.
 
 ```common-lisp
-(.foldl (lambda (acc x) (append acc (list (1+ x))) '(1 2) '(2 3 4))) ;; => '(1 2 3 4 5)
-(.foldl (lambda (acc x) (cons x acc)) '() '(1 2 3)) ;; => '(3 2 1)
-(.foldl (lambda (acc x) (cons x acc)) '() '()) ;; => '()
+(foldl (lambda (acc x) (append acc (list (1+ x))) '(1 2) '(2 3 4))) ;; => '(1 2 3 4 5)
+(foldl (lambda (acc x) (cons x acc)) '() '(1 2 3)) ;; => '(3 2 1)
+(foldl (lambda (acc x) (cons x acc)) '() '()) ;; => '()
 ```
 
-#### .foldl1 `(fn list)`
+#### foldl1 `(fn list)`
 
-A variant of .foldl that has no base case, and thus may only be applied to non-empty lists.
+A variant of foldl that has no base case, and thus may only be applied to non-empty lists.
 
 ```common-lisp
-(.foldl1 #'+ '(1 2 3)) ;; => 6
-(.foldl1 #'list '(1 2 3 4)) ;; => '(((1 2) 3) 4)
+(foldl1 #'+ '(1 2 3)) ;; => 6
+(foldl1 #'list '(1 2 3 4)) ;; => '(((1 2) 3) 4)
 ```
 
-#### .foldr `(fn init-val list)`
+#### foldr `(fn init-val list)`
 
 Right-associative fold of a list.
 
 ```common-lisp
-(.foldr (lambda (x acc) (append acc (list (1+ x))) '(1 2) '(4 3 2))) ;; => '(1 2 3 4 5)
-(.foldr (lambda (x acc) (cons x acc)) '() '(1 2 3)) ;; => '(1 2 3)
-(.foldr (lambda (x acc) (cons x acc)) '() '()) ;; => '()
+(foldr (lambda (x acc) (append acc (list (1+ x))) '(1 2) '(4 3 2))) ;; => '(1 2 3 4 5)
+(foldr (lambda (x acc) (cons x acc)) '() '(1 2 3)) ;; => '(1 2 3)
+(foldr (lambda (x acc) (cons x acc)) '() '()) ;; => '()
 ```
 
-#### .foldr1 `(fn list)`
+#### foldr1 `(fn list)`
 
-A variant of .foldr that has no base case, and thus may only be applied to non-empty lists.
+A variant of foldr that has no base case, and thus may only be applied to non-empty lists.
 
 ```common-lisp
-(.foldr1 #'+ '(1 2 3)) ;; => 6
-(.foldr1 #'list '(1 2 3 4)) ;; => '(1 (2 (3 4)))
+(foldr1 #'+ '(1 2 3)) ;; => 6
+(foldr1 #'list '(1 2 3 4)) ;; => '(1 (2 (3 4)))
 ```
 
 ### Special folds
 
-#### .concat `(list)`
+#### concat `(list)`
 
 The concatenation of all the elements of a container of lists.
 
 ```common-lisp
-(.concat '((1) (2 3) (4 5 6))) ;; => '(1 2 3 4 5 6)
-(.concat '((1)) ;; => '(1)
-(.concat '(() ()) ;; => '()
+(concat '((1) (2 3) (4 5 6))) ;; => '(1 2 3 4 5 6)
+(concat '((1)) ;; => '(1)
+(concat '(() ()) ;; => '()
 ```
 
-#### .concat-map `(fn list)`
+#### concat-map `(fn list)`
 
 Map a function over all the elements of a container and concatenate the resulting lists.
 
 ```common-lisp
-(.concat-map #'list '(1 2 3)) ;; => '(1 2 3)
-(.concat-map (lambda (x) 
+(concat-map #'list '(1 2 3)) ;; => '(1 2 3)
+(concat-map (lambda (x) 
               (list x x)) 
              '(1 2 3)) ;; => '(1 1 2 2 3 3)
-(.concat-map #'null '()) ;; => NIL
+(concat-map #'null '()) ;; => NIL
 ```
 
-#### .and `(list)`
+#### and `(list)`
 
-.and returns the conjunction of values in list.
+and returns the conjunction of values in list.
 
 
 ```common-lisp
-(.and '(t t)) ;; => t
-(.and '(t nil)) ;; => nil
-(.and '()) ;; => t
+(and '(t t)) ;; => t
+(and '(t nil)) ;; => nil
+(and '()) ;; => t
 ```
 
-#### .or `(list)`
+#### or `(list)`
 
-.or returns the disjunction of values in list.
+or returns the disjunction of values in list.
 
 ```common-lisp
-(.or '(t nil t)) ;; => t
-(.or '(nil nil nil)) ;; => nil
-(.or '()) ;; => nil
+(or '(t nil t)) ;; => t
+(or '(nil nil nil)) ;; => nil
+(or '()) ;; => nil
 ```
 
-#### .any `(fn list)`
+#### any `(fn list)`
 
 Determines whether any element of the list satisfies the predicate.
 
 ```common-lisp
-(.any #'numberp '("1" "2" 3)) ;; => t
-(.any #'numberp '()) ;; => nil
+(any #'numberp '("1" "2" 3)) ;; => t
+(any #'numberp '()) ;; => nil
 ```
 
-#### .all `(fn list)`
+#### all `(fn list)`
 
 Determines whether all elements of the list satisfy the predicate.
 
 ```common-lisp
-(.all #'numberp '(1 2 3)) ;; => t
-(.all #'numberp '(1 "2" 3)) ;; => nil
-(.all #'numberp '()) ;; => t
+(all #'numberp '(1 2 3)) ;; => t
+(all #'numberp '(1 "2" 3)) ;; => nil
+(all #'numberp '()) ;; => t
 ```
 
-#### .sum `(list)`
+#### sum `(list)`
 
-The .sum function computes the sum of the numbers of a list.
+The sum function computes the sum of the numbers of a list.
 
 ```common-lisp
-(.sum '(1 2 3)) ;; => 6
-(.sum '()) ;; => 0
+(sum '(1 2 3)) ;; => 6
+(sum '()) ;; => 0
 ```
 
-#### .product `(list)`
+#### product `(list)`
 
-The .product function computes the product of the numbers of a list.
+The product function computes the product of the numbers of a list.
 
 ```common-lisp
-(.product '(1 2 3)) ;; => 6
-(.product '()) ;; => 1
+(product '(1 2 3)) ;; => 6
+(product '()) ;; => 1
 ```
 
-#### .maximum `(list)`
+#### maximum `(list)`
 
 The largest element of a non-empty list.
 
 ```common-lisp
-(.maximum '(1 2 3 4 5)) ;; => 5
-(.maximum '(1 2 3.0)) ;; => 3.0
+(maximum '(1 2 3 4 5)) ;; => 5
+(maximum '(1 2 3.0)) ;; => 3.0
 ```
 
-#### .minimum `(list)`
+#### minimum `(list)`
 
 The least element of a non-empty list.
 
 ```common-lisp
-(.minimum '(1 2 3 4 5)) ;; => 1
-(.minimum '(1.0 2 3)) ;; => 1.0
+(minimum '(1 2 3 4 5)) ;; => 1
+(minimum '(1.0 2 3)) ;; => 1.0
 ```
 
 ### Building lists
 
 ### Scans
 
-#### .scanl `(fn init-value list)`
+#### scanl `(fn init-value list)`
 
-.scanl is similar to foldl, but returns a list of successive reduced values from the left:
+scanl is similar to foldl, but returns a list of successive reduced values from the left:
 
-`(.scanl fn init '(x1 x2 ...)) == (list init (fn init x1) (fn (fn init x1) x2) ...)`
-
-```common-lisp
-(.scanl #'+ 1 '(2 3 4)) ;; => '(1 3 6 10)
-(.scanl #'+ 1 '()) ;; => '(1)
-```
-#### .scanl1 `(fn list)`
-
-.scanl1 is a variant of .scanl that has no starting value argument.
+`(scanl fn init '(x1 x2 ...)) == (list init (fn init x1) (fn (fn init x1) x2) ...)`
 
 ```common-lisp
-(.scanl1 #'+ '(1 2 3 4)) ;; => '(1 3 6 10)
-(.scanl1 #'+ '()) ;; => nil
+(scanl #'+ 1 '(2 3 4)) ;; => '(1 3 6 10)
+(scanl #'+ 1 '()) ;; => '(1)
 ```
 
-#### .scanr `(fn init-value list)`
+#### scanl1 `(fn list)`
 
-.scanr is the right-to-left dual of .scanl. 
+scanl1 is a variant of scanl that has no starting value argument.
 
 ```common-lisp
-(.scanr #'+ 1 '(2 3 4)) ;; => '(10 8 5 1)
-(.scanr #'+ 1 '()) ;; => '(1)
+(scanl1 #'+ '(1 2 3 4)) ;; => '(1 3 6 10)
+(scanl1 #'+ '()) ;; => nil
 ```
 
-#### .scanr1 `(fn list)`
+#### scanr `(fn init-value list)`
 
-.scanr1 is a variant of .scanr that has no starting value argument.
+scanr is the right-to-left dual of scanl. 
 
 ```common-lisp
-(.scanr1 #'+ '(2 3 4 1)) ;; => '(10 8 5 1)
-(.scanr1 #'+ '(5 4 3 2 1)) ;; => '(15 10 6 3 1)
-(.scanr1 #'+ '()) ;; => nil
+(scanr #'+ 1 '(2 3 4)) ;; => '(10 8 5 1)
+(scanr #'+ 1 '()) ;; => '(1)
+```
+
+#### scanr1 `(fn list)`
+
+scanr1 is a variant of scanr that has no starting value argument.
+
+```common-lisp
+(scanr1 #'+ '(2 3 4 1)) ;; => '(10 8 5 1)
+(scanr1 #'+ '(5 4 3 2 1)) ;; => '(15 10 6 3 1)
+(scanr1 #'+ '()) ;; => nil
 ```
 
 ### Accumulating maps
 
-#### .map-accum-l `(fn init-val list)`
+#### map-accum-l `(fn init-val list)`
 
-.map-accum-l applies a function to each element of a list, passing an accumulating parameter from left to right, and returning a final value of this accumulator together with the new structure.
+map-accum-l applies a function to each element of a list, passing an accumulating parameter from left to right, and returning a final value of this accumulator together with the new structure.
 
 ```common-lisp
-(.map-accum-l (lambda (acc x) (list acc (+ x acc))) 1 '(1 2 3)) ;; => '(1 (2 3 4))
-(.map-accum-l (lambda (acc x) (list (1+ acc) (+ x acc))) 1 '(1 2 3)) ;; => '(4 (2 4 6))
+(map-accum-l (lambda (acc x) (list acc (+ x acc))) 1 '(1 2 3)) ;; => '(1 (2 3 4))
+(map-accum-l (lambda (acc x) (list (1+ acc) (+ x acc))) 1 '(1 2 3)) ;; => '(4 (2 4 6))
 ```
 
-#### .map-accum-r `(fn init-val list)`
+#### map-accum-r `(fn init-val list)`
 
-.map-accum-r applies a function to each element of a list, passing an accumulating parameter from right to left, and returning a final value of this accumulator together with the new structure.
+map-accum-r applies a function to each element of a list, passing an accumulating parameter from right to left, and returning a final value of this accumulator together with the new structure.
 
 ```common-lisp
-(.map-accum-r (lambda (acc x) (list acc (+ x acc))) 1 '(1 2 3)) ;; => '(1 (2 3 4))
-(.map-accum-r (lambda (acc x) (list (1+ acc) (+ x acc))) 1 '(1 2 3)) ;; => '(4 (4 4 4))
+(map-accum-r (lambda (acc x) (list acc (+ x acc))) 1 '(1 2 3)) ;; => '(1 (2 3 4))
+(map-accum-r (lambda (acc x) (list (1+ acc) (+ x acc))) 1 '(1 2 3)) ;; => '(4 (4 4 4))
 ```
 
 ### Infinite lists
 
-#### .iterate `(fn init-val)`
+#### iterate `(fn init-val)`
 
-`(.iterate fn val)` returns an list of repeated applications of fn to val:
+`(iterate fn val)` returns an list of repeated applications of fn to val:
 
-`(.iterate f x) ==  (list x (f x) (f (f x)) ...)`
+`(iterate f x) ==  (list x (f x) (f (f x)) ...)`
 
 ```common-lisp
-(.take 4 (.iterate #'1+ 0)) ;; => '(0 1 2 3)'
-(.take 0 (.iterate #'1+ 0)) ;; => nil
+(take 4 (iterate #'1+ 0)) ;; => '(0 1 2 3)'
+(take 0 (iterate #'1+ 0)) ;; => nil
 ```
 
-#### .repeat `(init-val)`
+#### repeat `(init-val)`
 
-`(.repeat x)` is an list, with x the value of every element.
+`(repeat x)` is an list, with x the value of every element.
 
 ```common-lisp
-(.take 4 (.repeat 1)) ;; => '(1 1 1 1)
-(.take 2 (.repeat :foo)) ;; => '(:foo :foo)
-(.take 0 (.repeat :foo)) ;; => nil
+(take 4 (repeat 1)) ;; => '(1 1 1 1)
+(take 2 (repeat :foo)) ;; => '(:foo :foo)
+(take 0 (repeat :foo)) ;; => nil
 ```
 
-#### .replicate `(size init-val)`
+#### replicate `(size init-val)`
 
-`(.replicate n x)` is a list of length n with x the value of every element.
+`(replicate n x)` is a list of length n with x the value of every element.
 
 ```common-lisp
-(.replicate 4 1) ;; => '(1 1 1 1)
-(.replicate 2 :foo) ;; => '(:foo :foo)
-(.replicate 0 :foo) ;; => nil
+(replicate 4 1) ;; => '(1 1 1 1)
+(replicate 2 :foo) ;; => '(:foo :foo)
+(replicate 0 :foo) ;; => nil
 ```
 
-#### .cycle `(list)`
+#### cycle `(list)`
 
-.cycle ties a finite list into a circular one, or equivalently, the infinite repetition of the original list. It is the identity on infinite lists.
+cycle ties a finite list into a circular one, or equivalently, the infinite repetition of the original list. It is the identity on infinite lists.
 
 ```common-lisp
-(.take 5 (.cycle '(1 2 3))) ;; => '(1 2 3 1 2)
-(.take 0 (.cycle '(1 2 3))) ;; => nil
+(take 5 (cycle '(1 2 3))) ;; => '(1 2 3 1 2)
+(take 0 (cycle '(1 2 3))) ;; => nil
 ```
 
 ### Unfolding
 
-#### .unfoldr `(fn init-val)`
+#### unfoldr `(fn init-val)`
 
-The .unfoldr function is a dual to .foldr: while .foldr reduces a list to a summary value, .unfoldr builds a list from a seed value. The function takes the element and returns NIL if it is done producing the list or returns '(a b), in which case, a is a prepended to the list and b is used as the next element in a recursive call.
+The unfoldr function is a dual to foldr: while foldr reduces a list to a summary value, unfoldr builds a list from a seed value. The function takes the element and returns NIL if it is done producing the list or returns '(a b), in which case, a is a prepended to the list and b is used as the next element in a recursive call.
 
 ```common-lisp
-(.unfoldr (lambda (x) (if (= x 0) nil (list x (1- x)))) 10) ;; => '(10 9 8 7 6 5 4 3 2 1)
-(.unfoldr (lambda (x) (if (= x 6) nil (list (expt 2 x) (1+ x)))) 1) ;; => '(2 4 8 16 32)
+(unfoldr (lambda (x) (if (= x 0) nil (list x (1- x)))) 10) ;; => '(10 9 8 7 6 5 4 3 2 1)
+(unfoldr (lambda (x) (if (= x 6) nil (list (expt 2 x) (1+ x)))) 1) ;; => '(2 4 8 16 32)
 ```
 
 ### Sublists
@@ -362,170 +373,170 @@ The .unfoldr function is a dual to .foldr: while .foldr reduces a list to a summ
 
 ### Extracting sublists
 
-#### .take `(count list)`
+#### take `(count list)`
 
-`(.take n xs)` returns the prefix of xs of length n, or xs itself if n > length xs.
+`(take n xs)` returns the prefix of xs of length n, or xs itself if n > length xs.
 
 ```common-lisp
-(.take 3 '(1 2 3 4 5)) ;; => '(1 2 3)
-(.take 3 '(1 2)) ;; => '(1 2)
-(.take 3 '()) ;; => nil
-(.take -1 '(1 2)) ;; => nil
-(.take 0 '(1 2)) ;; => nil
+(take 3 '(1 2 3 4 5)) ;; => '(1 2 3)
+(take 3 '(1 2)) ;; => '(1 2)
+(take 3 '()) ;; => nil
+(take -1 '(1 2)) ;; => nil
+(take 0 '(1 2)) ;; => nil
 ```
 
 This function maybe use with infinite lists. 
 
 ```common-lisp
-(.take 4 (.cycle '(1 2 3))) ;; => '(1 2 3 1)
-(.take 4 (.iterate #'1+ 0)) ;; => '(0 1 2 3)
-(.take 4 (.repeat 1)) ;; => '(1 1 1 1)
+(take 4 (cycle '(1 2 3))) ;; => '(1 2 3 1)
+(take 4 (iterate #'1+ 0)) ;; => '(0 1 2 3)
+(take 4 (repeat 1)) ;; => '(1 1 1 1)
 ```
 
-#### .drop `(count list)`
+#### drop `(count list)`
 
-`(.drop n xs)` returns the suffix of xs after the first n elements, or NIL if n > length xs.
+`(drop n xs)` returns the suffix of xs after the first n elements, or NIL if n > length xs.
 
 ```common-lisp
-(.drop 3 '(1 2 3 4 5)) ;; => '(4 5)
-(.drop 3 '(1 2)) ;; => nil
-(.drop 3 '()) ;; => nil
-(.drop -1 '(1 2)) ;; => '(1 2)
-(.drop 0 '(1 2)) ;; => '(1 2)
+(drop 3 '(1 2 3 4 5)) ;; => '(4 5)
+(drop 3 '(1 2)) ;; => nil
+(drop 3 '()) ;; => nil
+(drop -1 '(1 2)) ;; => '(1 2)
+(drop 0 '(1 2)) ;; => '(1 2)
 ```
 
-#### .split-at `(count list)`
+#### split-at `(count list)`
 
-`splitAt n xs` returns a list where first element is xs prefix of length n and second element is the remainder of the list.
+`(split-at n xs)` returns a list where first element is xs prefix of length n and second element is the remainder of the list.
 
 ```common-lisp
-(.split-at 3 '(1 2 3 4 5)) ;; =>  '((1 2 3) (4 5))
-(.split-at 1 '(1 2 3) ;; => '((1) (2 3))
-(.split-at 3 '(1 2 3) ;; => '((1 2 3) nil)
-(.split-at 4 '(1 2 3) ;; => '((1 2 3) ())
-(.split-at 0 '(1 2 3) ;; => '(nil (1 2 3))
-(.split-at -1 '(1 2 3) ;; => '(nil (1 2 3))
+(split-at 3 '(1 2 3 4 5)) ;; =>  '((1 2 3) (4 5))
+(split-at 1 '(1 2 3) ;; => '((1) (2 3))
+(split-at 3 '(1 2 3) ;; => '((1 2 3) nil)
+(split-at 4 '(1 2 3) ;; => '((1 2 3) ())
+(split-at 0 '(1 2 3) ;; => '(nil (1 2 3))
+(split-at -1 '(1 2 3) ;; => '(nil (1 2 3))
 ```
 
-#### .take-while `(pred list)`
+#### take-while `(pred list)`
 
-.take-while, applied to a predicate PRED and a LIST, returns the longest prefix (possibly empty) of LIST of elements that satisfy PRED.
+take-while, applied to a predicate PRED and a LIST, returns the longest prefix (possibly empty) of LIST of elements that satisfy PRED.
 
 ```common-lisp
-(.take-while #'evenp '(1 2 3 4)) ;; => '()
-(.take-while #'evenp '(2 4 5 6)) ;; => '(2 4)
+(take-while #'evenp '(1 2 3 4)) ;; => '()
+(take-while #'evenp '(2 4 5 6)) ;; => '(2 4)
 ```
 
-#### .drop-while `(pred list)`
+#### drop-while `(pred list)`
 
-`.drop-while p xs` returns the suffix remaining after `.take-while p xs`.
+`(drop-while p xs)` returns the suffix remaining after `(take-while p xs)`.
 
 ```common-lisp
-(.drop-while #'numberp '(1 2 3 nil nil 1 2 3)) ;; => '(nil nil 1 2 3)
-(.drop-while #'numberp '(1 2 3)) ;; => '()
-(.drop-while #'stringp '(1 2 3)) ;; => '(1 2 3)
+(drop-while #'numberp '(1 2 3 nil nil 1 2 3)) ;; => '(nil nil 1 2 3)
+(drop-while #'numberp '(1 2 3)) ;; => '()
+(drop-while #'stringp '(1 2 3)) ;; => '(1 2 3)
 ```
 
-#### .drop-while-end `(pred list)`
+#### drop-while-end `(pred list)`
 
-The .drop-while-end function drops the largest suffix of a list in which the given predicate holds for all elements.
+The drop-while-end function drops the largest suffix of a list in which the given predicate holds for all elements.
 
 ```common-lisp
-(.drop-while-end #'numberp '("foo" "bar" 1 2 3)) ;; => '("foo" "bar")
-(.drop-while-end #'numberp '("foo" 1 2 3 "bar")) ;; => '("foo" 1 2 3 "bar")
-(.drop-while-end #'numberp '(1 2 3)) ;; => '()
+(drop-while-end #'numberp '("foo" "bar" 1 2 3)) ;; => '("foo" "bar")
+(drop-while-end #'numberp '("foo" 1 2 3 "bar")) ;; => '("foo" 1 2 3 "bar")
+(drop-while-end #'numberp '(1 2 3)) ;; => '()
 ```
 
-#### .span `(pred list)`
+#### span `(pred list)`
 
-.span, applied to a predicate PRED and a LIST, returns a list where first element is longest prefix (possibly empty) of LIST of elements that satisfy PRED and second element is the remainder of the list.
+span, applied to a predicate PRED and a LIST, returns a list where first element is longest prefix (possibly empty) of LIST of elements that satisfy PRED and second element is the remainder of the list.
 
 ```common-lisp
-(.span (lambda (x) (< x 3)) '(1 2 3 4 1 2 3 4)) ;; => '((1 2) (3 4 1 2 3 4))
-(.span (lambda (x) (< x 9)) '(1 2 3)) ;; => '((1 2 3) ())
-(.span (lambda (x) (< x 0)) '(1 2 3)) ;; => '(() (1 2 3))
+(span (lambda (x) (< x 3)) '(1 2 3 4 1 2 3 4)) ;; => '((1 2) (3 4 1 2 3 4))
+(span (lambda (x) (< x 9)) '(1 2 3)) ;; => '((1 2 3) ())
+(span (lambda (x) (< x 0)) '(1 2 3)) ;; => '(() (1 2 3))
 ```
 
-#### .break `(pred list)`
+#### break `(pred list)`
 
-.break, applied to a predicate PRED and a LIST, returns a list where first element is longest prefix (possibly empty) of LIST of elements that do not satisfy PRED and second element is the remainder of the list
+break, applied to a predicate PRED and a LIST, returns a list where first element is longest prefix (possibly empty) of LIST of elements that do not satisfy PRED and second element is the remainder of the list
 
 ```common-lisp
-(.break (lambda (x) (> x 3)) '(1 2 3 4 1 2 3 4)) ;; => '((1 2 3) (4 1 2 3 4))
-(.break (lambda (x) (< x 9)) '(1 2 3)) ;; => '(() (1 2 3))
-(.break (lambda (x) (> x 9)) '(1 2 3)) ;; => '((1 2 3) ())
+(break (lambda (x) (> x 3)) '(1 2 3 4 1 2 3 4)) ;; => '((1 2 3) (4 1 2 3 4))
+(break (lambda (x) (< x 9)) '(1 2 3)) ;; => '(() (1 2 3))
+(break (lambda (x) (> x 9)) '(1 2 3)) ;; => '((1 2 3) ())
 ```
 
-#### .strip-prefix `(prefix list &optional (default nil))`
+#### strip-prefix `(prefix list &optional (default nil))`
 
-The .strip-prefix function drops the given prefix from a list. It returns DEFAULT value if the list did not start with the prefix given, or the list after the prefix, if it does.
+The strip-prefix function drops the given prefix from a list. It returns DEFAULT value if the list did not start with the prefix given, or the list after the prefix, if it does.
 
 ```common-lisp
-(.strip-prefix '(1 2) '(1 2 3 4)) ;; => '(3 4)
-(.strip-prefix '(1 2) '(1 2)) ;; => '()
-(.strip-prefix '(1 2) '(3 4 1 2)) ;; => NIL
-(.strip-prefix '(1 2) '(3 4 1 2 5 6)) ;; => NIL
+(strip-prefix '(1 2) '(1 2 3 4)) ;; => '(3 4)
+(strip-prefix '(1 2) '(1 2)) ;; => '()
+(strip-prefix '(1 2) '(3 4 1 2)) ;; => NIL
+(strip-prefix '(1 2) '(3 4 1 2 5 6)) ;; => NIL
 ```
 
-#### .inits `(list)`
+#### inits `(list)`
 
-The .inits function returns all initial segments of the argument, shortest first.
+The inits function returns all initial segments of the argument, shortest first.
 
 ```common-lisp
-(.inits '(1 2 3)) ;; => '(nil (1) (1 2) (1 2 3))
-(.inits '()) ;; => '(nil)
+(inits '(1 2 3)) ;; => '(nil (1) (1 2) (1 2 3))
+(inits '()) ;; => '(nil)
 ```
 
-#### .tails `(list)`
+#### tails `(list)`
 
-The .tails function returns all final segments of the argument, longest first.
+The tails function returns all final segments of the argument, longest first.
 
 ```common-lisp
-(.tails '(1 2 3)) ;; => '((1 2 3) (2 3) (3) nil)
-(.tails '()) ;; => '(nil)
+(tails '(1 2 3)) ;; => '((1 2 3) (2 3) (3) nil)
+(tails '()) ;; => '(nil)
 ```
 
 ### Predicates
 
-#### .is-prefix-of `(prefix list)`
+#### is-prefix-of `(prefix list)`
 
-The .is-prefix-of function takes two lists and returns `T` if the first list is a prefix of the second.
+The is-prefix-of function takes two lists and returns `T` if the first list is a prefix of the second.
 
 ```common-lisp
-(.is-prefix-of '(1 2) '(1 2 3 4)) ;; => T
-(.is-prefix-of '(1 2) '(4 3 2 1)) ;; => nil
-(.is-prefix-of '() '(1 2 3)) ;; => T
+(is-prefix-of '(1 2) '(1 2 3 4)) ;; => T
+(is-prefix-of '(1 2) '(4 3 2 1)) ;; => nil
+(is-prefix-of '() '(1 2 3)) ;; => T
 ```
 
-#### .is-suffix-of `(suffix list)`
+#### is-suffix-of `(suffix list)`
 
-The .is-suffix-of function takes two lists and returns `T` if the first list is a suffix of the second. 
+The is-suffix-of function takes two lists and returns `T` if the first list is a suffix of the second. 
 
 ```common-lisp
-(.is-suffix-of '(2 1) '(4 3 2 1)) ;; => T
-(.is-suffix-of '(1 2) '(4 3 2 1)) ;; => nil
-(.is-suffix-of '() '(1 2 3)) ;; => T
+(is-suffix-of '(2 1) '(4 3 2 1)) ;; => T
+(is-suffix-of '(1 2) '(4 3 2 1)) ;; => nil
+(is-suffix-of '() '(1 2 3)) ;; => T
 ```
 
-#### .is-infix-of `(infix list)`
+#### is-infix-of `(infix list)`
 
-The .is-infix-of function takes two lists and returns `T` if the first list is contained, wholly and intact, anywhere within the second.
+The is-infix-of function takes two lists and returns `T` if the first list is contained, wholly and intact, anywhere within the second.
 
 ```common-lisp
-(.is-infix-of '(1 2) '(3 3 1 2 3 3)) ;; => T
-(.is-infix-of '(1 2 3) '(4 1 2 4 3)) ;; => nil
-(.is-infix-of '() '(1 2 3)) ;; => T
+(is-infix-of '(1 2) '(3 3 1 2 3 3)) ;; => T
+(is-infix-of '(1 2 3) '(4 1 2 4 3)) ;; => nil
+(is-infix-of '() '(1 2 3)) ;; => T
 ```
 
-#### .is-subsequence-of `(subseq list)`
+#### is-subsequence-of `(subseq list)`
 
-The .is-subsequence-of function takes two lists and returns `T` if all the elements of the first list occur, in order, in the second. The elements do not have to occur consecutively.
+The is-subsequence-of function takes two lists and returns `T` if all the elements of the first list occur, in order, in the second. The elements do not have to occur consecutively.
 
 
 ```common-lisp
-(.is-subsequence-of '(1 2 3) '(1 0 2 0 3 0)) ;; => T
-(.is-subsequence-of '(1 2 3) '(1 0 2 0 4 0)) ;; => nil
-(.is-subsequence-of '() '(1 2 3)) ;; => T
+(is-subsequence-of '(1 2 3) '(1 0 2 0 3 0)) ;; => T
+(is-subsequence-of '(1 2 3) '(1 0 2 0 4 0)) ;; => nil
+(is-subsequence-of '() '(1 2 3)) ;; => T
 ```
 
 
@@ -534,127 +545,127 @@ The .is-subsequence-of function takes two lists and returns `T` if all the eleme
 
 ### Searching by equality
 
-#### .elem `(element list &key (test 'equalp))`
+#### elem `(element list &key (test 'equalp))`
 
 Does the element occur in the structure?
 
 ```common-lisp
-(.elem 1 '(1 2 3)) ;; => T
-(.elem "one" '(1 "one" 3) :test 'eql) ;; => nil
+(elem 1 '(1 2 3)) ;; => T
+(elem "one" '(1 "one" 3) :test 'eql) ;; => nil
 ```
 
-#### .not-elem `(element list &key (test 'equalp))`
+#### not-elem `(element list &key (test 'equalp))`
 
-.not-elem is the negation of .elem.
+not-elem is the negation of elem.
 
 ```common-lisp
-(.not-elem 7 '(1 2 3)) ;; => T
-(.not-elem "one" '(1 "one" 3) :test 'eql) ;; => T
+(not-elem 7 '(1 2 3)) ;; => T
+(not-elem "one" '(1 "one" 3) :test 'eql) ;; => T
 ```
 
 ### Searching with a predicate
 
-#### .find `(pred list &optional (default nil))`
+#### find `(pred list &optional (default nil))`
 
-The .find function takes a predicate and a list and returns the leftmost element of the list matching the predicate, or `default` argument if there is no such element.
+The find function takes a predicate and a list and returns the leftmost element of the list matching the predicate, or `default` argument if there is no such element.
 
 ```common-lisp
-(.find #'numberp '(:foo :bar 1 2 3)) ;; => 1
-(.find #'numberp '(:foo :bar)) ;; => nil
-(.find #'numberp '(:foo :bar) 666) ;; => 666
+(find #'numberp '(:foo :bar 1 2 3)) ;; => 1
+(find #'numberp '(:foo :bar)) ;; => nil
+(find #'numberp '(:foo :bar) 666) ;; => 666
 ```
 
-#### .filter `(pred list)`
+#### filter `(pred list)`
 
-.filter, applied to a predicate and a list, returns the list of those elements that satisfy the predicate; i.e.,
+filter, applied to a predicate and a list, returns the list of those elements that satisfy the predicate; i.e.,
 
 ```common-lisp
-(.filter #'numberp '(:foo 1 :bar 2 3)) ;; => '(1 2 3)
-(.filter #'numberp '(:foo :bar)) ;; => nil
+(filter #'numberp '(:foo 1 :bar 2 3)) ;; => '(1 2 3)
+(filter #'numberp '(:foo :bar)) ;; => nil
 ```
 
-#### .partition `(pred list)`
+#### partition `(pred list)`
 
-The .partition function takes a predicate a list and returns the pair of lists of elements which do and do not satisfy the predicate, respectively; i.e.,
+The partition function takes a predicate a list and returns the pair of lists of elements which do and do not satisfy the predicate, respectively; i.e.,
 
 ```common-lisp
-(.partition #'numberp '(:foo 1 :bar 2)) ;; => '((1 2) (:foo :bar))
-(.partition #'numberp '(:foo :bar)) ;; => '(() (:foo :bar))
+(partition #'numberp '(:foo 1 :bar 2)) ;; => '((1 2) (:foo :bar))
+(partition #'numberp '(:foo :bar)) ;; => '(() (:foo :bar))
 ```
 
 ### Indexing lists
 
-#### .elem-index `(item list &optional (default nil))`
+#### elem-index `(item list &optional (default nil))`
 
-The .elem-index function returns the index of the first element in the given list which is equal to the query element, or DEFAULT if there is no such element.
+The elem-index function returns the index of the first element in the given list which is equal to the query element, or DEFAULT if there is no such element.
 
 ```common-lisp
-(.elem-index 2 '(1 2 3)) ;; => 1
-(.elem-index 2 '(1 2 3 2 1)) ;; => 1
-(.elem-index 0 '(1 2 3) 42) ;; => 42
+(elem-index 2 '(1 2 3)) ;; => 1
+(elem-index 2 '(1 2 3 2 1)) ;; => 1
+(elem-index 0 '(1 2 3) 42) ;; => 42
 ```
 
-#### .elem-indices `(item list)`
+#### elem-indices `(item list)`
 
-The .elem-indices function extends .elem-index, by returning the indices of all elements equal to the query element, in ascending order.
+The elem-indices function extends elem-index, by returning the indices of all elements equal to the query element, in ascending order.
 
 ```common-lisp
-(.elem-indices 42 '(1 42 3 42)) ;; => '(1 3)
-(.elem-indices 42 '(1 2 3)) ;; => '()
+(elem-indices 42 '(1 42 3 42)) ;; => '(1 3)
+(elem-indices 42 '(1 2 3)) ;; => '()
 ```
 
-#### .find-index `(pred list &optional (default nil))`
+#### find-index `(pred list &optional (default nil))`
 
-The .find-index function takes a predicate and a list and returns the index of the first element in the list satisfying the predicate, or DEFAULT if there is no such element.
+The find-index function takes a predicate and a list and returns the index of the first element in the list satisfying the predicate, or DEFAULT if there is no such element.
 
 ```common-lisp
-(.find-index #'keywordp '(1 :foo 3)) ;; => 1
-(.find-index #'keywordp '(1 :foo 3 :bar 1)) ;; => 1
-(.find-index #'keywordp '(1 2 3) 42) ;; => 42
+(find-index #'keywordp '(1 :foo 3)) ;; => 1
+(find-index #'keywordp '(1 :foo 3 :bar 1)) ;; => 1
+(find-index #'keywordp '(1 2 3) 42) ;; => 42
 ```
 
-#### .find-indices `(pred list)`
+#### find-indices `(pred list)`
 
-The .find-indices function extends .find-index, by returning the indices of all elements satisfying the PRED, in ascending order.
+The find-indices function extends find-index, by returning the indices of all elements satisfying the PRED, in ascending order.
 
 ```common-lisp
-(.find-indices #'keywordp '(1 :foo 3 :bar)) ;; => '(1 3)
-(.find-indices #'keywordp '(1 2 3)) ;; => '()
+(find-indices #'keywordp '(1 :foo 3 :bar)) ;; => '(1 3)
+(find-indices #'keywordp '(1 2 3)) ;; => '()
 ```
 
 ### Zipping and unzipping lists
 
-#### .zip `(&rest lists)`
+#### zip `(&rest lists)`
 
 Zip LISTS together. Group the head of each list, followed by the second elements of each list, and so on. The lengths of the returned groupings are equal to the length of the shortest input list.
 
 
 ```common-lisp
-(.zip '(1 2) '(3 4) '(5 6))) ;; => '((1 3 5) (2 4 6))
-(.zip '(1 2 3) '(4) '(5 6))) ;; => '((1 4 5))
-(.zip '(1 2 3) '() '(5 6))) ;; => '()
+(zip '(1 2) '(3 4) '(5 6))) ;; => '((1 3 5) (2 4 6))
+(zip '(1 2 3) '(4) '(5 6))) ;; => '((1 4 5))
+(zip '(1 2 3) '() '(5 6))) ;; => '()
 ```
 
-#### .zip-with `(fn &rest lists)`
+#### zip-with `(fn &rest lists)`
 
-.zip-with generalises zip by zipping with the function given as the first argument.
+zip-with generalises zip by zipping with the function given as the first argument.
 
 ```common-lisp
-(.zip-with #'+ '(1 2) '(3 4) '(5 6))) ;; => '(9 12)
-(.zip-with #'list '(1 2) '(3 4) '(5 6))) ;; => '((1 3 5) (2 4 6))
-(.zip-with #'+ '(1 2 3) '() '(5 6))) ;; => '()
+(zip-with #'+ '(1 2) '(3 4) '(5 6))) ;; => '(9 12)
+(zip-with #'list '(1 2) '(3 4) '(5 6))) ;; => '((1 3 5) (2 4 6))
+(zip-with #'+ '(1 2 3) '() '(5 6))) ;; => '()
 ```
 
-#### .unzip `(lists)`
+#### unzip `(lists)`
 
-Opposite by sense to .zip.
+Opposite by sense to zip.
 
 
 ```common-lisp
-(.unzip '((1 2) (3 4) (5 6))) ;; => '((1 3 5) (2 4 6))
-(.unzip (.zip '(1 2) '(3 4) '(5 6))) ;; => '((1 2) (3 4) (5 6))
-(.unzip '((1 2 3) '(4) '(5 6))) ;; => '((1 4 5))
-(.unzip '((1 2 3) '())) ;; => '()
+(unzip '((1 2) (3 4) (5 6))) ;; => '((1 3 5) (2 4 6))
+(unzip (.zip '(1 2) '(3 4) '(5 6))) ;; => '((1 2) (3 4) (5 6))
+(unzip '((1 2 3) '(4) '(5 6))) ;; => '((1 4 5))
+(unzip '((1 2 3) '())) ;; => '()
 ```
 
 
