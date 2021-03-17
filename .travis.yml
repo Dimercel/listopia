@@ -12,7 +12,7 @@ env:
 install:
   # Install Roswell
   - curl -L https://raw.githubusercontent.com/snmsts/roswell/release/scripts/install-for-ci.sh | sh
-  - ros install prove
+  - ros install fukamachi/rove
 
 cache:
   directories:
@@ -24,4 +24,4 @@ before_script:
   - ros config
 
 script:
-  - run-prove listopia-test.asd
+  - rove listopia-test.asd

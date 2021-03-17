@@ -1,6 +1,6 @@
 # Listopia
 
- This is no official port of Haskell package [Data.List](https://hackage.haskell.org/package/base-4.10.1.0/docs/Data-List.html)
+ List manipulation library inspired by Haskell package [Data.List](https://hackage.haskell.org/package/base-4.10.1.0/docs/Data-List.html)
 
 ## Usage
 
@@ -675,7 +675,7 @@ Opposite by sense to `zip`.
 
 ## Copyright
 
-Copyright (c) 2019 Ito Dimercel (xolcman@gmail.com)
+Copyright (c) 2021 Ito Dimercel (xolcman@gmail.com)
 
 ## License
 
