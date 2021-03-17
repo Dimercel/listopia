@@ -24,4 +24,4 @@ before_script:
   - ros config
 
 script:
-  - rove listopia-test.asd
+  - rove listopia.asd
